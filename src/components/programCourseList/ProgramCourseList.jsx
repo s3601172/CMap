@@ -9,11 +9,10 @@ function ProgramCourseList() {
       <h1>P1 Bachelor of IT</h1>
       <table>
         <tr>
-          <th>Course ID</th>
+          <th>Course Code</th>
           <th>Course Name</th>
           <th>Course Type</th>
           <th>To Be Taken</th>
-          <th>Select</th>
         </tr>
 
         <tr>
@@ -21,9 +20,6 @@ function ProgramCourseList() {
           <td>Programming 1</td>
           <td>Core</td>
           <td>Semester 1</td>
-          <td>
-            <input type="checkbox"></input>
-          </td>
         </tr>
 
         <tr>
@@ -31,9 +27,6 @@ function ProgramCourseList() {
           <td>Software Engineering Fundamentals</td>
           <td>Core</td>
           <td>Semester 1</td>
-          <td>
-            <input type="checkbox"></input>
-          </td>
         </tr>
 
         <tr>
@@ -41,13 +34,11 @@ function ProgramCourseList() {
           <td>Introduction to Graphics Design</td>
           <td>University Elective</td>
           <td>Semester 3</td>
-          <td>
-            <input type="checkbox"></input>
-          </td>
         </tr>
       </table>
 
-      <button type="button"> Deallocate Course</button>
+      <button type="button"> Add Course</button>
+      <button type="button"> Remove Course</button>
     </div>
   );
 }
