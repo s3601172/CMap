@@ -3,41 +3,53 @@ import React, { Component } from "react";
 import "./Topic.css";
 
 import Sidebar from "../sidebar/Sidebar";
+//replace this with db data
+let topicList = [
+  {
+    id: "CMP.cf.1",
+    bokRef: "MP.cf",
+    category: "Computing Essentials",
+    topic: "Programming Fundamentals (Control and Data Typing)"
+  },
+  {
+    id: "CMP.ct.1",
+    bokRef: "CMP.ct",
+    category: "Construction Technologies",
+    topic: "API Design and Use"
+  }
+];
 
-class TopicList extends Component{
-    render(){
-        return(
-            <div className = "centre">
-                <Sidebar/>
-                <h1>Topic List</h1>
-                <input type="text" name="search"></input>
-                <button type="submit">Search</button>
-                <table>
-                    <tr>
-                        <th>Topic ID</th>
-                        <th>Body of Knowledge Reference</th>
-                        <th>Category</th>
-                        <th>Topic</th>
-                    </tr>
+class TopicList extends Component {
+  render() {
+    return (
+      <div className="centre">
+        <Sidebar />
+        <h1>Topic List</h1>
+        <input type="text" name="search"></input>
+        <button type="submit">Search</button>
+        <table>
+          <thead>
+            <tr>
+              <th>Topic ID</th>
+              <th>Body of Knowledge Reference</th>
+              <th>Category</th>
+              <th>Topic</th>
+            </tr>
+          </thead>
 
-                    <tr>
-                        <td>CMP.cf.1</td>
-                        <td>MP.cf</td>
-                        <td>Computing Essentials</td>
-                        <td>Programming Fundamentals (Control and Data Typing)</td>
-                    </tr>
-
-                    <tr>
-                        <td>CMP.ct.1</td>
-                        <td>CMP.ct</td>
-                        <td>Construction Technologies</td>
-                        <td>API Design and Use</td>
-                    </tr>
-                </table>
-            </div>
-            
-            
-        )
-    }
+          <tbody>
+            {topicList.map(topics => (
+              <tr>
+                <td>{topics.id}</td>
+                <td>{topics.bokRef}</td>
+                <td>{topics.category}</td>
+                <td>{topics.topic}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
 }
 export default TopicList;
