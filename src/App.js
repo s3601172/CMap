@@ -1,10 +1,13 @@
 import React from 'react';
-import Homepage from "./components/homepage/Homepage";
-import CourseDetail from "./components/coursedetail/CourseDetail"
+
+//  import Homepage from "./components/homepage/Homepage";
+import TopicList from "./components/topicList/TopicList";
 
 function App() {
   return (
-     <CourseDetail/>
+    // <Homepage/>
+    <TopicList />
+
   );
 }
 
