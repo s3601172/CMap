@@ -1,4 +1,3 @@
-import Sidebar from "../sidebar/Sidebar";
 import Table from "../table/Table"
 import React ,{Component} from 'react';
 import "./CourseDetails.css";
@@ -40,10 +39,9 @@ class CourseDetails extends Component{
     render(){
         return(
           <div className = "centre">
-            <Sidebar />
             <h1>C1 Programming 1</h1>
             <Table columns = {columns} data={coursedetail}/>
-            <button type="submit">Add Topic</button>
+            <button type="submit">Add New Topic</button>
           </div>
         )
       }
