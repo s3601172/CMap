@@ -2,6 +2,9 @@ import React ,{Component} from 'react';
 import {BrowserRouter as Router, Route,Switch,Link} from 'react-router-dom'
 import "./Addtopic.css"
 import Sidebar from "../sidebar/Sidebar";
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
 
 class add extends Component{
     constructor(props){
@@ -9,10 +12,11 @@ class add extends Component{
         this.state = {
             title :
             [
-                {BOKRr:'Test',Category:'Computing Essentials' ,TopicID:'1', Topic:'Test',PreReq:'Test',Outcome:'test',Hours:'5'}
+                {BOKRr:'Test',Category:'Computing Essentials' ,TopicID:'1', Topic:'Test',PreReq:'',Outcome:'',Hours:''}
             ]
         }
     }
+
     render() {
         return (
             <div className ="center">
@@ -40,9 +44,24 @@ class add extends Component{
                                             <td>{title.Category}</td>
                                             <td>{title.TopicID}</td>
                                             <td>{title.Topic}</td>
-                                            <td>{title.PreReq}</td>
-                                            <td>{title.Outcome}</td>
-                                            <td>{title.Hours}</td>
+                                            <td><Select displayEmpty={true}>
+                                            <MenuItem>{title.PreReq}</MenuItem>
+                                            <MenuItem>{'Test'}</MenuItem>
+                                            <MenuItem>{'Test'}</MenuItem>
+                                            <MenuItem>{'Testt'}</MenuItem>
+                                            </Select></td>
+                                           <td> <Select displayEmpty={true}>
+                                            <td><MenuItem>{title.Outcome}</MenuItem></td>
+                                            <MenuItem>{'Testt'}</MenuItem>
+                                            <MenuItem>{'Testt'}</MenuItem>
+                                            <MenuItem>{'Testt'}</MenuItem>
+                                            </Select></td>
+                                            <td><Select displayEmpty={true}>
+                                            <MenuItem>{title.Hours}</MenuItem>
+                                            <MenuItem>{'10'}</MenuItem>
+                                            <MenuItem>{'20'}</MenuItem>
+                                            <MenuItem>{'30'}</MenuItem>
+                                            </Select></td>
                                         </tr>
                                 )
                             }
