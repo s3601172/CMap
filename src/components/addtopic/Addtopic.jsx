@@ -1,12 +1,13 @@
-import React ,{Component} from './node_modules/react';
-import {BrowserRouter as Router, Route,Switch,Link} from './node_modules/react-router-dom'
+import React ,{Component} from 'react';
+import {BrowserRouter as Router, Route,Switch,Link} from 'react-router-dom'
 import "./Addtopic.css"
-import Sidebar from "../sidebar/Sidebar"
+import Sidebar from "../sidebar/Sidebar";
 
 class addT extends Component{
     render() {
         return(
             <div className="addTopic">
+            <Sidebar/>
             </div>
         )
     }
@@ -18,13 +19,14 @@ class add extends Component{
         this.state = {
             todos :
             [
-                {BOKRr:'TEst',Category:'Computing Essentials' ,TopicID:'1', Topic:'Test',PreReq:'Test',Outcome:'test',Hour:5}
+                {BOKRr:'Test',Category:'Computing Essentials' ,TopicID:'1', Topic:'Test',PreReq:'Test',Outcome:'test',Hour:'5'}
             ]
         }
     }
     render() {
         return (
             <div className ="center">
+            <Sidebar/>
                 <h1>Add Topic</h1>
                 <div className="container">
                     <table className="table table-bordered">
@@ -56,7 +58,7 @@ class add extends Component{
 
                         </tbody>
                     </table>
-                    <Link to="/programCourseDetail"><button className="btn btn-outline-primary" >Add Topic</button> </Link>
+                    <button className="btn btn-outline-primary" >Add Topic</button>
                 </div>
             </div>
         )
@@ -71,4 +73,4 @@ class addTp extends Component{
     }
 }
 
-export default addTopic;
+export default add;

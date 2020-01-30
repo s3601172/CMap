@@ -4,7 +4,7 @@ import Addtopic from "./components/addtopic/Addtopic";
 
 function App() {
   return (
-     <Homepage/>
+     <Addtopic/>
   );
 }
 
