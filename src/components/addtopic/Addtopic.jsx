@@ -7,7 +7,7 @@ class add extends Component{
     constructor(props){
         super(props)
         this.state = {
-            todos :
+            title :
             [
                 {BOKRr:'Test',Category:'Computing Essentials' ,TopicID:'1', Topic:'Test',PreReq:'Test',Outcome:'test',Hours:'5'}
             ]
@@ -33,12 +33,13 @@ class add extends Component{
                         </thead>
                         <tbody>
                             {
-                                this.state.todos.map(
+                                this.state.title.map(
                                     title =>
                                         <tr>
                                             <td>{title.BOKRr}</td>
                                             <td>{title.Category}</td>
                                             <td>{title.TopicID}</td>
+                                            <td>{title.Topic}</td>
                                             <td>{title.PreReq}</td>
                                             <td>{title.Outcome}</td>
                                             <td>{title.Hours}</td>
