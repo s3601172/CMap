@@ -1,10 +1,8 @@
 import React ,{Component} from 'react';
 
 import "./AddTopic.css"
-import Sidebar from "../sidebar/Sidebar";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
 
 class AddTopic extends Component{
     constructor(props){
