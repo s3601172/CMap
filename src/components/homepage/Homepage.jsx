@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./HomepageStyle.css";
 
-
 class Homepage extends Component {
   render(userType) {
     userType = "PMCC";
@@ -27,7 +26,6 @@ class Homepage extends Component {
     } else if (userType === "CC") {
       return (
         <div className = "center">
-          <Sidebar />
           <h1>Your Courses</h1>
 
           <table>
@@ -44,7 +42,6 @@ class Homepage extends Component {
     } else if (userType === "PMCC") {
       return (
         <div className = "center">
-          <Sidebar />
           <h1>Your Programs</h1>
 
           <table>
