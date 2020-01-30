@@ -1,10 +1,9 @@
 import React from 'react';
-//import Homepage from "./components/homepage/Homepage";
-import Addtopic from "./components/addtopic/Addtopic";
+ import Homepage from "./components/homepage/Homepage";
 
 function App() {
   return (
-     <Addtopic/>
+    <Homepage/>
   );
 }
 
