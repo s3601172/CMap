@@ -1,5 +1,6 @@
 import Table from "../table/Table"
 import React ,{Component} from 'react';
+import {Link} from "react-router-dom";
 import "./CourseDetails.css";
 
 const columns = [
@@ -41,7 +42,7 @@ class CourseDetails extends Component{
           <div className = "centre">
             <h1>C1 Programming 1</h1>
             <Table columns = {columns} data={coursedetail}/>
-            <button type="submit">Add New Topic</button>
+            <Link to="/topic-list"><button type="submit">Add New Topic</button></Link>
           </div>
         )
       }

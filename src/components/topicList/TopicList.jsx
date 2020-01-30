@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Link} from "react-router-dom";
 
 import "../../index.css";
 
@@ -95,7 +96,7 @@ class TopicList extends Component {
         <Sidebar />
         <h1>Topic List</h1>
         <SearchableTable columns = {columns} data={topicList}/>
-        <button type="submit">Add Topic</button>
+        <Link to="add-topic"><button type="submit">Add Topic</button></Link>
       </div>
     )
   }

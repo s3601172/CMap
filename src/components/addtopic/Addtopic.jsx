@@ -10,7 +10,7 @@ class AddTopic extends Component{
         this.state = {
             title :
             [
-                {BOKRr:'Test',Category:'Computing Essentials' ,TopicID:'1', Topic:'Test',PreReq:'',Outcome:'',Hours:''}
+                {BOKRr:'ACM-IEEE-SE2014',Category:'Computing Essentials' ,TopicID:'1', Topic:'Programming Fundamentals (Control and Data Typing)',PreReq:'',Outcome:'',Hours:''}
             ]
         }
     }
