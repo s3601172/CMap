@@ -1,7 +1,6 @@
-import Sidebar from "../sidebar/Sidebar";
-import Table from "../Table"
+import Table from "../table/Table"
 import React ,{Component} from 'react';
-import "./Coursedetail.css";
+import "./CourseDetails.css";
 
 const columns = [
     { Header: "Topic ID", accessor: "id" },
@@ -36,16 +35,15 @@ let coursedetail = [
     
   ];
 
-class CourseDetail extends Component{
+class CourseDetails extends Component{
     render(){
         return(
           <div className = "centre">
-            <Sidebar />
-            <h1>C Programming 1</h1>
+            <h1>C1 Programming 1</h1>
             <Table columns = {columns} data={coursedetail}/>
-            <button type="submit">Add Topic</button>
+            <button type="submit">Add New Topic</button>
           </div>
         )
       }
 }  
-export default CourseDetail
+export default CourseDetails
