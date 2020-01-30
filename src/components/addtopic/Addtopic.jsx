@@ -1,9 +1,7 @@
 import React ,{Component} from 'react';
-import {BrowserRouter as Router, Route,Switch,Link} from 'react-router-dom'
-import "./Addtopic.css"
-import Sidebar from "../sidebar/Sidebar";
+import "./AddTopic.css"
 
-class add extends Component{
+class AddTopic extends Component{
     constructor(props){
         super(props)
         this.state = {
@@ -16,7 +14,6 @@ class add extends Component{
     render() {
         return (
             <div className ="center">
-            <Sidebar/>
                 <h1>Add Topic</h1>
                 <div className="container">
                     <table className="table table-bordered">
@@ -56,4 +53,4 @@ class add extends Component{
     }
 }
 
-export default add;
+export default AddTopic;

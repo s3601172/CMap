@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import "../../index.css";
 
 import Sidebar from "../sidebar/Sidebar";
-import SearchableTable from "../table/SearchableTable";
+import SearchableTable from "../searchableTable/SearchableTable";
 
 const columns = [
   { Header: "Topic ID", accessor: "id" },
