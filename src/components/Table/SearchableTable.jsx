@@ -1,29 +1,29 @@
 import React from "react";
-import { useTable, useGlobalFilter, useRowSelect } from "react-table";
+import {
+  useTable,
+  useGlobalFilter,
+  useRowSelect,
+  usePagination
+} from "react-table";
 
 const IndeterminateCheckbox = React.forwardRef(
   ({ indeterminate, ...rest }, ref) => {
-    const defaultRef = React.useRef()
-    const resolvedRef = ref || defaultRef
+    const defaultRef = React.useRef();
+    const resolvedRef = ref || defaultRef;
 
     React.useEffect(() => {
-      resolvedRef.current.indeterminate = indeterminate
-    }, [resolvedRef, indeterminate])
+      resolvedRef.current.indeterminate = indeterminate;
+    }, [resolvedRef, indeterminate]);
 
     return (
       <>
         <input type="checkbox" ref={resolvedRef} {...rest} />
       </>
-    )
+    );
   }
-)
+);
 
-
-function GlobalFilter({
-  preGlobalFilteredRows,
-  globalFilter,
-  setGlobalFilter
-}) {
+function GlobalFilter({ globalFilter, setGlobalFilter }) {
   return (
     <span>
       Search:{" "}
@@ -37,30 +37,38 @@ function GlobalFilter({
   );
 }
 
-function Table({ columns, data }) {
-  const defaultColumn = React.useMemo(() => ({}), []);
+function SearchableTable({ columns, data }) {
+  const pageIndex = 1;
 
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
     prepareRow,
     state,
     preGlobalFilteredRows,
     setGlobalFilter,
+    page,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+
   } = useTable(
     {
       columns,
       data,
-      defaultColumn
     },
     useGlobalFilter,
+    usePagination,
     useRowSelect,
     hooks => {
       hooks.flatColumns.push(columns => [
         {
-          id: 'selection',
+          id: "selection",
           Header: ({ getToggleAllRowsSelectedProps }) => (
             <div>
               <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
@@ -70,14 +78,12 @@ function Table({ columns, data }) {
             <div>
               <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
             </div>
-          ),
+          )
         },
-        ...columns,
-      ])
+        ...columns
+      ]);
     }
   );
-
-  const firstPageRows = rows.slice(0, 10);
 
   return (
     <>
@@ -98,7 +104,7 @@ function Table({ columns, data }) {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {firstPageRows.map((row, i) => {
+          {page.map((row, i) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
@@ -112,9 +118,28 @@ function Table({ columns, data }) {
           })}
         </tbody>
       </table>
-      <div>Showing the first 10 rows of {rows.length} rows</div>
+      <div className="pagination">
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {"<<"}
+        </button>
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          {"<"}
+        </button>
+        <button onClick={() => nextPage()}  disabled={!canNextPage}>
+          {">"}
+        </button>
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {">>"}
+        </button>
+        <span>
+          Page 
+          <strong>
+             {pageIndex} of {pageOptions.length} 
+          </strong>
+        </span>
+      </div>
     </>
   );
 }
 
-export default Table;
+export default SearchableTable;

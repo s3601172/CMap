@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import "./Topic.css";
 
 import Sidebar from "../sidebar/Sidebar";
-import Table from "../Table";
+import SearchableTable from "../Table/SearchableTable";
 
 const columns = [
   { Header: "Topic ID", accessor: "id" },
@@ -88,14 +88,13 @@ let topicList = [
   }
 ];
 
-
 class TopicList extends Component {
   render(){
     return(
       <div className = "centre">
         <Sidebar />
         <h1>Topic List</h1>
-        <Table columns = {columns} data={topicList}/>
+        <SearchableTable columns = {columns} data={topicList}/>
         <button type="submit">Add Topic</button>
       </div>
     )
