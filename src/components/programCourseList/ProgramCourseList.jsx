@@ -1,11 +1,9 @@
 import React from "react";
 import "./ProgramCourseList.css";
-import Sidebar from "../sidebar/Sidebar";
 
 function ProgramCourseList() {
   return (
     <div className = "center">
-      <Sidebar />
       <h1>P1 Bachelor of IT</h1>
       <table>
         <tr>

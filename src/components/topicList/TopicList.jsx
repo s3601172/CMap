@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-import "./Topic.css";
+import "../../index.css";
 
 import Sidebar from "../sidebar/Sidebar";
-import SearchableTable from "../Table/SearchableTable";
+import SearchableTable from "../searchableTable/SearchableTable";
 
 const columns = [
   { Header: "Topic ID", accessor: "id" },

@@ -1,9 +1,10 @@
 import React from 'react';
- import Homepage from "./components/homepage/Homepage";
+
+import CMap from "./components/CMap";
 
 function App() {
   return (
-    <Homepage/>
+    <CMap />
   );
 }
 
