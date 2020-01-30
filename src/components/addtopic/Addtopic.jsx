@@ -1,10 +1,8 @@
 import React ,{Component} from 'react';
 
 import "./AddTopic.css"
-import Sidebar from "../sidebar/Sidebar";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
 
 class AddTopic extends Component{
     constructor(props){
@@ -45,15 +43,15 @@ class AddTopic extends Component{
                                             <td>{title.Topic}</td>
                                             <td><Select displayEmpty={true}>
                                             <MenuItem>{title.PreReq}</MenuItem>
-                                            <MenuItem>{'Test'}</MenuItem>
-                                            <MenuItem>{'Test'}</MenuItem>
-                                            <MenuItem>{'Testt'}</MenuItem>
+                                            <MenuItem>{"Knowledge"}</MenuItem>
+                                            <MenuItem>{"Comprehension"}</MenuItem>
+                                            <MenuItem>{"Application"}</MenuItem>
                                             </Select></td>
                                            <td> <Select displayEmpty={true}>
                                             <td><MenuItem>{title.Outcome}</MenuItem></td>
-                                            <MenuItem>{'Testt'}</MenuItem>
-                                            <MenuItem>{'Testt'}</MenuItem>
-                                            <MenuItem>{'Testt'}</MenuItem>
+                                            <MenuItem>{"Knowledge"}</MenuItem>
+                                            <MenuItem>{"Comprehension"}</MenuItem>
+                                            <MenuItem>{"Application"}</MenuItem>
                                             </Select></td>
                                             <td><Select displayEmpty={true}>
                                             <MenuItem>{title.Hours}</MenuItem>
