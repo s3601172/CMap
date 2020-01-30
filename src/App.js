@@ -1,12 +1,12 @@
 import React from 'react';
 
 //  import Homepage from "./components/homepage/Homepage";
-import TopicList from "./components/topicList/TopicList";
+import CourseDetails from "./components/coursedetails/CourseDetails";
 
 function App() {
   return (
     // <Homepage/>
-    <TopicList />
+    <CourseDetails />
 
   );
 }
