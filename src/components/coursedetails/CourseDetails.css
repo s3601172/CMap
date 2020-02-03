@@ -1,3 +1,4 @@
+  
 .centre{
     text-align: center;
 }
@@ -13,8 +14,4 @@ table{
 
 table, th, td{
     border: 2px solid black;
-}
-
-.search-box{
-    max-width: 400px;
 }

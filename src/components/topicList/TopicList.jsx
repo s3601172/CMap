@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import {Link} from "react-router-dom";
 
-import "./Topic.css";
+import "../../index.css";
 
 import Sidebar from "../sidebar/Sidebar";
-import SearchableTable from "../Table/SearchableTable";
+import SearchableTable from "../searchableTable/SearchableTable";
 
 const columns = [
   { Header: "Topic ID", accessor: "id" },
@@ -95,7 +96,7 @@ class TopicList extends Component {
         <Sidebar />
         <h1>Topic List</h1>
         <SearchableTable columns = {columns} data={topicList}/>
-        <button type="submit">Add Topic</button>
+        <Link to="add-topic"><button type="submit">Add Topic</button></Link>
       </div>
     )
   }

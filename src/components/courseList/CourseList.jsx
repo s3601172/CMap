@@ -1,12 +1,10 @@
 import React from "react";
 import "./CourseList.css";
 import { CourseTypeMenu, ToBeTakenMenu, AllocateToMenu} from "./DropdownMenu";
-import Sidebar from "../sidebar/Sidebar";
 
 function CourseList() {
   return (
     <div className="center">
-      <Sidebar />
       <h1>P1 Bachelor of IT</h1>
       <table>
         <tr>

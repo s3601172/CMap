@@ -1,10 +1,10 @@
 import React from 'react';
-// import Homepage from "./components/homepage/Homepage";
-import TopicList from "./components/Topic/TopicList"
+
+import CMap from "./components/CMap";
+
 function App() {
   return (
-    // <Homepage/>
-    <TopicList/>
+    <CMap />
   );
 }
 
