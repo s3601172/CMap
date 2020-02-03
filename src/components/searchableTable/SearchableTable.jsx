@@ -1,4 +1,5 @@
 import React from "react";
+import "../../bootstrap.css";
 
 import {
   useTable,
@@ -26,15 +27,16 @@ const IndeterminateCheckbox = React.forwardRef(
 
 function GlobalFilter({ globalFilter, setGlobalFilter }) {
   return (
-    <span>
-      Search:{" "}
+    <div className="input-group mb-3">
+      <span className="input-group-text">Search</span>
       <input
+        className="form-control"
         value={globalFilter || ""}
         onChange={e => {
           setGlobalFilter(e.target.value || undefined);
         }}
       />
-    </span>
+    </div>
   );
 }
 
@@ -88,48 +90,52 @@ function SearchableTable({ columns, data }) {
 
   return (
     <>
-      <GlobalFilter
-        preGlobalFilteredRows={preGlobalFilteredRows}
-        globalFilter={state.globalFilter}
-        setGlobalFilter={setGlobalFilter}
-      />
-
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row, i) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map(cell => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                  );
-                })}
+      <div className="container">
+        <GlobalFilter
+          preGlobalFilteredRows={preGlobalFilteredRows}
+          globalFilter={state.globalFilter}
+          setGlobalFilter={setGlobalFilter}
+        />
+      </div>
+      <div className="container">
+        <table className="table table-striped table-bordered" {...getTableProps()}>
+          <thead className="thead-dark"> 
+            {headerGroups.map(headerGroup => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map(column => (
+                  <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <div className="pagination">
-        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map((row, i) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map(cell => {
+                    return (
+                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="pagination container">
+        <button className="btn btn-outline-dark" onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
           {"<<"}
         </button>
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+        <button className="btn btn-outline-dark" onClick={() => previousPage()} disabled={!canPreviousPage}>
           {"<"}
         </button>
-        <button onClick={() => nextPage()}  disabled={!canNextPage}>
+        <button className="btn btn-outline-dark" onClick={() => nextPage()}  disabled={!canNextPage}>
           {">"}
         </button>
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+        <button className="btn btn-outline-dark" onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
           {">>"}
         </button>
         <span>

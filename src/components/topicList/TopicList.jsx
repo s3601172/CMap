@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {Link} from "react-router-dom";
 
+import "../../bootstrap.css";
 import "../../index.css";
 
 import Sidebar from "../sidebar/Sidebar";
@@ -96,7 +97,7 @@ class TopicList extends Component {
         <Sidebar />
         <h1>Topic List</h1>
         <SearchableTable columns = {columns} data={topicList}/>
-        <Link to="add-topic"><button type="submit">Add Topic</button></Link>
+        <Link to="add-topic"><button className="btn btn-outline-dark" type="submit">Add Topic</button></Link>
       </div>
     )
   }
