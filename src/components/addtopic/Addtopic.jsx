@@ -1,6 +1,6 @@
 import React ,{Component} from 'react';
 
-import "./AddTopic.css"
+import "./addTopic.css"
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 

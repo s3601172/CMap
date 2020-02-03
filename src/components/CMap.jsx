@@ -6,9 +6,9 @@ import Homepage from "./homepage/Homepage";
 import ProgramDetails from "./programDetails/ProgramDetails";
 import ProgramCourseList from "./programCourseList/ProgramCourseList";
 import CourseList from "./courseList/CourseList";
-import CourseDetails from "./courseDetails/CourseDetails";
+import CourseDetails from "./coursedetails/CourseDetails";
 import TopicList from "./topicList/TopicList";
-import AddTopic from "./addTopic/AddTopic";
+import addtopic from "./addtopic/addTopic";
 
 function CMap(){
     return(
@@ -23,7 +23,7 @@ function CMap(){
                 <Route path="/course-list" component={CourseList}/>
                 <Route path="/course-details" component={CourseDetails}/>
                 <Route path="/topic-list" component={TopicList}/>
-                <Route path="/add-topic" component={AddTopic}/>
+                <Route path="/add-Topic" component={addtopic}/>
             </Switch>
         </Router>
       </div>
