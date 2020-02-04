@@ -4,7 +4,6 @@ import TopicService from "../API/topic/TopicService.js";
 import "../../bootstrap.css";
 import "../../index.css";
 
-import Sidebar from "../sidebar/Sidebar";
 import SearchableTable from "../searchableTable/SearchableTable";
 
 const columns = [
@@ -42,7 +41,6 @@ class TopicList extends Component {
   render() {
     return (
       <div className="centre">
-        <Sidebar />
         <h1>Topic List</h1>
         <SearchableTable columns={columns} data={this.state.topicList} />
         <button className="btn btn-outline-dark" type="submit">

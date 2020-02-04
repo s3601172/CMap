@@ -1,4 +1,4 @@
-package com.cmap.rest.webservices.cmaprestfulwebservices.topic;
+package com.cmap.rest.webservices.cmaprestfulwebservices.course;
 
 import java.util.List;
 
@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins="http://localhost:3000")
-public class TopicResource {
+public class CourseResource {
 	@Autowired
-	private TopicService topicService;
+	private CourseService courseService;
 	
-	@GetMapping("topic-list")
-	public List<Topic> getTopicList(){
-		return topicService.getTopicList();	
+	@GetMapping("course-list")
+	public List<Course> getCourseList(){
+		return courseService.getCourseList();	
 	}
 }
