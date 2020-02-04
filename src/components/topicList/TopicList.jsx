@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import TopicService from "../API/topic/TopicService.js";
 
 import "../../bootstrap.css";
@@ -36,17 +35,19 @@ class TopicList extends Component {
     })
   }
 
+  addTopicBtn(){
+    this.props.history.push("/add-topic");
+  }
+
   render() {
     return (
       <div className="centre">
         <Sidebar />
         <h1>Topic List</h1>
         <SearchableTable columns={columns} data={this.state.topicList} />
-        <Link to="add-topic">
-          <button className="btn btn-outline-dark" type="submit">
-            Add Topic
-          </button>
-        </Link>
+        <button className="btn btn-outline-dark" type="submit">
+          Add Topic
+        </button>
       </div>
     );
   }

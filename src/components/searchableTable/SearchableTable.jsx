@@ -1,12 +1,12 @@
 import React from "react";
-import "../../bootstrap.css";
-
 import {
   useTable,
   useGlobalFilter,
   useRowSelect,
   usePagination
 } from "react-table";
+
+import "../../bootstrap.css";
 
 const IndeterminateCheckbox = React.forwardRef(
   ({ indeterminate, ...rest }, ref) => {
@@ -40,6 +40,11 @@ function GlobalFilter({ globalFilter, setGlobalFilter }) {
   );
 }
 
+function selectedID(rowID){
+  rowID = JSON.stringify(rowID);
+  console.log(rowID);
+}
+
 function SearchableTable({ columns, data }) {
   const pageIndex = 1;
 
@@ -59,7 +64,7 @@ function SearchableTable({ columns, data }) {
     gotoPage,
     nextPage,
     previousPage,
-
+    state: {selectedRowIds}
   } = useTable(
     {
       columns,
@@ -79,7 +84,7 @@ function SearchableTable({ columns, data }) {
           ),
           Cell: ({ row }) => (
             <div>
-              <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
+              <IndeterminateCheckbox onClick={selectedID(row.getToggleRowSelectedProps())} {...row.getToggleRowSelectedProps()} />
             </div>
           )
         },
