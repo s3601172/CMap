@@ -9,11 +9,14 @@ class TopicList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      topicList: []
+      topicList: [],
+      selectedList: [],
+      selectedIndex: 0
     };
     
     this.renderTableData = this.renderTableData.bind(this);
     this.refreshList = this.refreshList.bind(this);
+    this.selectId = this.selectId.bind(this);
   }
 
   componentDidMount() {
@@ -28,14 +31,27 @@ class TopicList extends Component {
     })
   }
 
-  
+  selectId(checked, id){
+    if(checked === true){
+      this.setState({
+        selectedList: this.state.selectedList.concat([id]),
+        selectedIndex: this.state.selectedIndex + 1
+      })
+    }else{
+      this.setState({
+        selectedList: this.state.selectedList.splice(this.state.selectedIndex),
+        selectedIndex: this.state.selectedIndex - 1
+      })
+    }
+    console.log(this.state.selectedList)
+  }  
 
   renderTableData() {
     return this.state.topicList.map((topicList, index) => {
       const { bokRef, area, unit, id, topic} = topicList;
       return (
           <tr key={id}>
-            <td><input type="checkbox"></input></td>
+            <td><input onClick={() => this.selectId(true,{id})} type="checkbox"></input></td>
             <td>{bokRef}</td>
             <td>{area}</td>
             <td>{unit}</td>
