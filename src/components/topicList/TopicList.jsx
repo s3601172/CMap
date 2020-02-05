@@ -14,7 +14,6 @@ class TopicList extends Component {
     
     this.renderTableData = this.renderTableData.bind(this);
     this.refreshList = this.refreshList.bind(this);
-    this.selectId = this.selectId.bind(this);
   }
 
   componentDidMount() {
