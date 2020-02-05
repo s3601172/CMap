@@ -13,19 +13,19 @@ public class TopicEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "topic_code")
-	private String id;
+	public String id;
 	
 	@Column(name = "ku")
-	private String unit;
+	public String unit;
 	
 	@Column(name = "title")
-	private String topic;
+	public String topic;
 	
 	@Column(name = "level")
-	private String outcomeLevel;
+	public String outcomeLevel;
 	
 	@Column(name = "requirement")
-	private String preReqLevel;
+	public String preReqLevel;
 	
 	public TopicEntity() {
 		
