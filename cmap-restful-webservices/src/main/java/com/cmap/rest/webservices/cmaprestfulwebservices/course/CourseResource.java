@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class CourseResource {
 	@Autowired
-	private CourseService courseService;
-	
+	private CourseDBRepository courseDB;
+
 	@GetMapping("course-list")
-	public List<Course> getCourseList(){
-		return courseService.getCourseList();	
+	public List<CourseEntity> getCourseList() {
+		return courseDB.findAll();
 	}
 }
