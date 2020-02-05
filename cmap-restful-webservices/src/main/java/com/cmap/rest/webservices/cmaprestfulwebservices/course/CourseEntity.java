@@ -13,10 +13,10 @@ public class CourseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="course_code")
-	private String courseCode;
+	public String courseCode;
 	
 	@Column(name = "title")
-	private String courseName;
+	public String courseName;
 	
 	public CourseEntity(){}
 	
