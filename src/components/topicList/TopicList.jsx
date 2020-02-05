@@ -31,19 +31,18 @@ class TopicList extends Component {
     })
   }
 
-  selectId(checked, id){
-    if(checked === true){
+  selectId(e, id){
+    if(e.target.checked === true){
       this.setState({
-        selectedList: this.state.selectedList.concat([id]),
+        selectedList: this.state.selectedList.concat(id),
         selectedIndex: this.state.selectedIndex + 1
       })
-    }else{
+    }else if(e.target.checked === false){
       this.setState({
         selectedList: this.state.selectedList.splice(this.state.selectedIndex),
         selectedIndex: this.state.selectedIndex - 1
       })
     }
-    console.log(this.state.selectedList)
   }  
 
   renderTableData() {
@@ -51,7 +50,7 @@ class TopicList extends Component {
       const { bokRef, area, unit, id, topic} = topicList;
       return (
           <tr key={id}>
-            <td><input onClick={() => this.selectId(true,{id})} type="checkbox"></input></td>
+            <td><input onChange={(e) => this.selectId(e,{id})} type="checkbox"></input></td>
             <td>{bokRef}</td>
             <td>{area}</td>
             <td>{unit}</td>
