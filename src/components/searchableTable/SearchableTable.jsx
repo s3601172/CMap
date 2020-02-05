@@ -45,7 +45,7 @@ function selectedID(rowID){
   console.log(rowID);
 }
 
-function SearchableTable({ columns, data }) {
+function SearchableTable({ columns, data}) {
   const pageIndex = 1;
 
   const {

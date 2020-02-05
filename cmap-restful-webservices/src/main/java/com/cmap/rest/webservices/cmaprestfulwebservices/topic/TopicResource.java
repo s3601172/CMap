@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins="http://localhost:3000")
 public class TopicResource {
 	@Autowired
-	private TopicService topicService;
+	private TopicDBRepository topicDB;
 	
 	@GetMapping("topic-list")
-	public List<Topic> getTodoList(){
-		return topicService.getTopicList();	
+	public List<TopicEntity> getTopicList(){
+		return topicDB.findAll();	
 	}
 }
