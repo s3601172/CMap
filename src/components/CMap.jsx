@@ -21,7 +21,7 @@ function CMap(){
                 <Route path="/program-course-list" component={ProgramCourseList}/>
                 <Route path="/course-list" component={CourseList}/>
                 <Route path="/course-details" component={CourseDetails}/>
-                <Route path="/topic-list" component={TopicList}/>   
+                <Route path="/topic-list" component={TopicList}/>
             </Switch>
         </Router>
       </div>
