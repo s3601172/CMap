@@ -1,50 +1,50 @@
-import Table from "../table/Table"
 import React ,{Component} from 'react';
 import {Link} from "react-router-dom";
-import "./CourseDetails.css";
+import SearchableTable from "../searchableTable/SearchableTable";
+import CourseService from "../API/course/CourseService.js";
+import "../../bootstrap.css";
 
 const columns = [
-    { Header: "Topic ID", accessor: "id" },
     { Header: "Body of Knowledge Reference", accessor: "bokRef" },
-    { Header: "Category", accessor: "category" },
+    { Header: "Area", accessor: "area" },
+    { Header: "Unit", accessor: "unit" },
+    { Header: "Topic ID", accessor: "topicid" },
     { Header: "Topic", accessor: "topic" },
-    { Header: "Pre-RequireLevel", accessor: "PreLevel" },
+    { Header: "Pre-Require Level", accessor: "PreLevel" },
     { Header: "Outcome Level", accessor: "OLevel" },
-    { Header: "Hours", accessor: "Hours" }
+    { Header: "Remove", accessor: "Remove"}
   ];
 
-//replace this with db data
-let coursedetail = [
-    {
-      id: "CMP.cf.1",
-      bokRef: "ACM-IEEE-SE2014",
-      category: "Computing Essentials",
-      topic: "Programming Fundamentals (Control and Data Typing)",
-      PreLevel:"Knowledge",
-      OLevel:"Application",
-      Hours:20
-    },
-    {
-      id: "CMP.ct.1",
-      bokRef: "ACM-IEEE-SE2014",
-      category: "Construction Technologies",
-      topic: "API Design and Use",
-      PreLevel:"N/A",
-      OLevel:"Comphension",
-      Hours:10
+  class CourseDetails extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+          courseList: []
+        };
     }
-    
-  ];
-
-class CourseDetails extends Component{
-    render(){
-        return(
-          <div className = "centre">
-            <h1>C1 Programming 1</h1>
-            <Table columns = {columns} data={coursedetail}/>
-            <Link to="/topic-list"><button type="submit">Add New Topic</button></Link>
-          </div>
-        )
-      }
-}  
+  
+    componentDidMount() {
+      this.refreshList();
+    }
+  
+    refreshList() {
+      CourseService.getTopicList().then(response=>{
+        this.setState({
+          courseList: response.data
+        })
+      })
+    }
+  
+    render() {
+      return (
+        <div className="centre">
+          <h1>Course Details</h1>
+          <SearchableTable columns={columns} data={this.state.courseList} />
+          <Link to ="/topic-list"><button className="btn btn-outline-dark" type="submit">Add New Topic
+          </button>
+          </Link>
+        </div>
+      );
+    }
+  }
 export default CourseDetails

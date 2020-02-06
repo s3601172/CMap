@@ -6,9 +6,9 @@ import Homepage from "./homepage/Homepage";
 import ProgramDetails from "./programDetails/ProgramDetails";
 import ProgramCourseList from "./programCourseList/ProgramCourseList";
 import CourseList from "./courseList/CourseList";
-import CourseDetails from "./courseDetails/CourseDetails";
+import CourseDetails from "./coursedetails/CourseDetails";
 import TopicList from "./topicList/TopicList";
-import AddTopic from "./addTopic/AddTopic";
+import AddTopic from "./addtopic/addTopic";
 
 function CMap(){
     return(

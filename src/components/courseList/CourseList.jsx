@@ -6,7 +6,8 @@ import "../../bootstrap.css";
 
 const columns = [
     { Header: "Course Code", accessor: "courseCode" },
-    { Header: "Course Name", accessor: "courseName"}
+    { Header: "Course Name", accessor: "courseName"},
+    { Header: "To be taken", accessor: "tobetaken" }
   ];
   
   class CourseList extends Component {
