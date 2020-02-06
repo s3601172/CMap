@@ -1,6 +1,6 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
+import { Datatable } from "@o2xp/react-datatable";
 import TopicService from "../API/topic/TopicService.js";
-import Pagination from "react-bootstrap/Pagination";
 
 import "../../bootstrap.css";
 import "../../index.css";
@@ -9,14 +9,10 @@ class TopicList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      topicList: [],
-      selectedList: [],
-      selectedIndex: 0
+      option: {}
     };
-    
-    this.renderTableData = this.renderTableData.bind(this);
     this.refreshList = this.refreshList.bind(this);
-    this.selectId = this.selectId.bind(this);
+    this.getOption = this.getOption.bind(this);
   }
 
   componentDidMount() {
@@ -24,106 +20,76 @@ class TopicList extends Component {
   }
 
   refreshList() {
-    TopicService.getTopicList().then(response=>{
+    TopicService.getTopicList().then(response => {
+      let resData = response.data;
       this.setState({
-        topicList: response.data
-      })
-    })
-  }
-
-  selectId(e, id){
-    if(e.target.checked === true){
-      this.setState({
-        selectedList: this.state.selectedList.concat(id),
-        selectedIndex: this.state.selectedIndex + 1
-      })
-    }else if(e.target.checked === false){
-      this.setState({
-        selectedList: this.state.selectedList.splice(this.state.selectedIndex),
-        selectedIndex: this.state.selectedIndex - 1
-      })
-    }
-  }  
-
-  renderTableData() {
-    return this.state.topicList.map((topicList, index) => {
-      const { bokRef, area, unit, id, topic} = topicList;
-      return (
-          <tr key={id}>
-            <td><input onChange={(e) => this.selectId(e,{id})} type="checkbox"></input></td>
-            <td>{bokRef}</td>
-            <td>{area}</td>
-            <td>{unit}</td>
-            <td>{topic}</td>
-            <td>
-                <select className="custom-select">
-                <option value="remembering">Remembering</option>
-                <option value="understanding">Understanding</option>
-                <option value="applying">Applying</option>
-                <option value="analyzing">Analyzing</option>
-                <option value="evaluating">Evaluating</option>
-                <option value="creating">Creating</option>
-                </select>
-            </td>
-            <td>
-              <select className="custom-select">
-              <option value="remembering">Remembering</option>
-              <option value="understanding">Understanding</option>
-              <option value="applying">Applying</option>
-              <option value="analyzing">Analyzing</option>
-              <option value="evaluating">Evaluating</option>
-              <option value="creating">Creating</option>
-              </select>
-            </td>
-          </tr>
-      );
+        option: this.getOption(resData)
+      });
+      console.log(resData);
     });
   }
 
+  getOption(data) {
+    let options = {
+      keyColumn: "id",
+      data: {
+        columns: [
+          {
+            id: "bokRef",
+            label: "Book of Knowledge Reference",
+            colSize: "80px"
+          },
+          {
+            id: "area",
+            label: "Knowledge Area",
+            colSize: "150px"
+          },
+          {
+            id: "unit",
+            label: "Knowledge Unit",
+            colSize: "50px"
+          },
+          {
+            id: "id",
+            label: "Topic ID",
+            colSize: "50px"
+          },
+          {
+            id: "topic",
+            label: "Topic Name",
+            colSize: "50px"
+          },
+          {
+            id: "outcomeLevel",
+            label: "Outcome Level",
+            colSize: "50px"
+          },
+          {
+            id: "preReqLevel",
+            label: "Prerequisite Level",
+            colSize: "50px"
+          }
+        ],
+        rows: data
+      },
+      features:{
+        canSelectRow:true
+      }
+    };
+
+    return options;
+  }
+
   render() {
-    return( 
-      <div className="container centre mt-5">
-        <h1>Topic List</h1>
-        <div className="input-group-prepend mt-4 mb-4">
-          <span className="input-group-text">Search</span>
-          <input type="text" className="form-control"></input>
+    return (
+      <div className="container">
+        <div className="container centre bm-4">
+          <h1>Topic List</h1>
         </div>
-      
-        <form>
-          <table className="table table-striped table-bordered">
-            <thead className="thead-dark">
-              <tr>
-                <th><input type="checkbox"></input></th>
-                <th>Book of Knowledge Reference</th>
-                <th>Area</th>
-                <th>Unit</th>
-                <th>Topic Name</th>
-                <th>Prerequisite Level</th>
-                <th>Outcome Level</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {this.renderTableData()}             
-            </tbody>
-          </table>
-
-          <Pagination>
-            <Pagination.First />
-            <Pagination.Prev />
-            <Pagination.Item>{1}</Pagination.Item>
-            <Pagination.Item>{2}</Pagination.Item>
-            <Pagination.Item>{3}</Pagination.Item>
-            <Pagination.Next />
-            <Pagination.Last />
-          </Pagination>
-          <button type="submit" className="btn btn-outline-dark">Add Topic(/s)</button>
-        </form>
+        <Datatable options={this.state.option} />
       </div>
-      
     );
   }
 }
 
 export default TopicList;
-
