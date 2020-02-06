@@ -3,6 +3,8 @@ import React ,{Component} from 'react';
 import "./addTopic.css"
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import "../../bootstrap.css";
+
 
 class AddTopic extends Component{
     constructor(props){
@@ -10,7 +12,7 @@ class AddTopic extends Component{
         this.state = {
             title :
             [
-                {BOKRr:'ACM-IEEE-SE2014',Category:'Computing Essentials' ,TopicID:'1', Topic:'Programming Fundamentals (Control and Data Typing)',PreReq:'',Outcome:'',Hours:''}
+                {BOKRr:'ACM-IEEE-SE2014',Category:'Computing Essentials' ,TopicID:'1', Topic:'Programming Fundamentals (Control and Data Typing)',PreReq:'',Outcome:''}
             ]
         }
     }
@@ -29,7 +31,6 @@ class AddTopic extends Component{
                                 <th>Topic</th>
                                 <th>Pre-Req Level</th>
                                 <th>Outcome Level</th>
-                                <th>Hours</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,12 +53,6 @@ class AddTopic extends Component{
                                             <MenuItem>{"Knowledge"}</MenuItem>
                                             <MenuItem>{"Comprehension"}</MenuItem>
                                             <MenuItem>{"Application"}</MenuItem>
-                                            </Select></td>
-                                            <td><Select displayEmpty={true}>
-                                            <MenuItem>{title.Hours}</MenuItem>
-                                            <MenuItem>{'10'}</MenuItem>
-                                            <MenuItem>{'20'}</MenuItem>
-                                            <MenuItem>{'30'}</MenuItem>
                                             </Select></td>
                                         </tr>
                                 )
