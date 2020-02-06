@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Datatable } from "@o2xp/react-datatable";
 import TopicService from "../API/topic/TopicService.js";
+import PublishIcon from "@material-ui/icons/Publish";
+import axios from "axios";
 
 import "../../bootstrap.css";
 import "../../index.css";
@@ -13,6 +15,7 @@ class TopicList extends Component {
     };
     this.refreshList = this.refreshList.bind(this);
     this.getOption = this.getOption.bind(this);
+    this.postTopic = this.postTopic.bind(this);
   }
 
   componentDidMount() {
@@ -25,8 +28,17 @@ class TopicList extends Component {
       this.setState({
         option: this.getOption(resData)
       });
-      console.log(resData);
     });
+  }
+
+  postTopic(rowData) {
+    let topicCode = rowData[0].id;
+    axios
+      .post("http://localhost:8080/add-course-topic", {topicCode})
+      .then(response => {
+        console.log(response);
+        console.log(response.data);
+      });
   }
 
   getOption(data) {
@@ -72,8 +84,16 @@ class TopicList extends Component {
         ],
         rows: data
       },
-      features:{
-        canSelectRow:true
+      features: {
+        canSelectRow: true,
+        canSearch: true,
+        selectionIcons: [
+          {
+            title: "Selected Rows",
+            icon: <PublishIcon color="primary" />,
+            onClick: rows => this.postTopic(rows)
+          }
+        ]
       }
     };
 

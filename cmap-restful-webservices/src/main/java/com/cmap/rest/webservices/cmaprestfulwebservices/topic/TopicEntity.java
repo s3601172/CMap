@@ -14,6 +14,7 @@ public class TopicEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "topic_code")
 	public String id;
+	
 	@Column(name = "guideline")
 	public String bokRef;
 	

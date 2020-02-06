@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins="http://localhost:3000")
 public class TopicResource {
 	@Autowired
-	private TopicDBRepository topicDB;
+	private TopicRepository topicDB;
 	
 	@GetMapping("topic-list")
 	public List<TopicEntity> getTopicList(){
