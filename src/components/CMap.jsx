@@ -8,7 +8,6 @@ import ProgramCourseList from "./programCourseList/ProgramCourseList";
 import CourseList from "./courseList/CourseList";
 import CourseDetails from "./courseDetails/CourseDetails";
 import TopicList from "./topicList/TopicList";
-import AddTopic from "./addTopic/AddTopic";
 
 function CMap(){
     return(
@@ -23,7 +22,6 @@ function CMap(){
                 <Route path="/course-list" component={CourseList}/>
                 <Route path="/course-details" component={CourseDetails}/>
                 <Route path="/topic-list" component={TopicList}/>
-                <Route path="/add-Topic" component={AddTopic}/>
             </Switch>
         </Router>
       </div>

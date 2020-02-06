@@ -38,7 +38,9 @@ class TopicList extends Component {
       .then(response => {
         console.log(response);
         console.log(response.data);
-      });
+      }
+      );
+      this.props.history.push("/course-details");
   }
 
   getOption(data) {
