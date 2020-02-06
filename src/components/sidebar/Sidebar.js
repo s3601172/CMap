@@ -9,14 +9,23 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 
 import "./Sidebar.css"
 
-function Sidebar() {
+const userList = [{
+  name: 'user1',
+  userType: 'pm'
+},
+{
+  name: 'user2',
+  userType:'coursecoordinator'
+}]
+
+function Sidebar(name) {
   return (
     <Menu>
     <List>
       <Link to="/Homepage"><ListItem Button> Username </ListItem></Link>
       <Link to="/Homepage"><ListItem button> Dashboard </ListItem></Link>
-      
-      <ListItem button>
+
+      {name && name.name === 'pm' && <ListItem button>
         <ExpansionPanel>
           <ExpansionPanelSummary>View Program Details</ExpansionPanelSummary>
           <Link to= "/program-details"><ExpansionPanelDetails>
@@ -31,8 +40,24 @@ function Sidebar() {
         </ExpansionPanelDetails></Link>
         </ExpansionPanel>
       </ListItem>
+}
+      {/* <ListItem button>
+        <ExpansionPanel>
+          <ExpansionPanelSummary>View Program Details</ExpansionPanelSummary>
+          <Link to= "/program-details"><ExpansionPanelDetails>
+         <ListItem button>
+          P1 Bachelor of Information Technology
+          </ListItem>
+          </ExpansionPanelDetails></Link>
+          <Link to= "/program-details"><ExpansionPanelDetails>
+          <ListItem button>
+            P2 Bachelor of Computer Science
+            </ListItem>
+        </ExpansionPanelDetails></Link>
+        </ExpansionPanel>
+      </ListItem> */}
 
-      <ListItem button>
+      {name && name.name === 'pm' && <ListItem button>
         <ExpansionPanel>
           <ExpansionPanelSummary>View Program Courses</ExpansionPanelSummary>
         <Link to ="/program-courses"><ExpansionPanelDetails>
@@ -47,8 +72,9 @@ function Sidebar() {
         </ExpansionPanelDetails>
         </ExpansionPanel>
       </ListItem>
+      }
 
-      <ListItem button>
+      {name && name.name === 'coursecoordinator' && <ListItem button>
         <ExpansionPanel>
         <ExpansionPanelSummary>
             View Course Details
@@ -65,6 +91,7 @@ function Sidebar() {
         </ExpansionPanelDetails>
         </ExpansionPanel>
       </ListItem>
+      }
 
       <Link to ="/topic-list"><ListItem button> View Course Topics </ListItem></Link>
       </List>
