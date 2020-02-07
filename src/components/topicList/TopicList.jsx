@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Datatable } from "@o2xp/react-datatable";
-import TopicService from "../API/topic/TopicService.js";
+import TopicService from "../API/topic/TopicService.js"
 import PublishIcon from "@material-ui/icons/Publish";
 import axios from "axios";
 
@@ -91,7 +91,7 @@ class TopicList extends Component {
         canSearch: true,
         selectionIcons: [
           {
-            title: "Selected Rows",
+            title: "Add Topic(/s)",
             icon: <PublishIcon color="primary" />,
             onClick: rows => this.postTopic(rows)
           }
