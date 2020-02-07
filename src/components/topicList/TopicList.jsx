@@ -91,7 +91,7 @@ class TopicList extends Component {
         canSearch: true,
         selectionIcons: [
           {
-            title: "Selected Rows",
+            title: "Add Topic(/s)",
             icon: <PublishIcon color="primary" />,
             onClick: rows => this.postTopic(rows)
           }
