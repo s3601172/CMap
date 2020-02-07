@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./HomepageStyle.css";
-import Sidebar from "../sidebar/Sidebar";
 
 class Homepage extends Component {
   render(userType) {
@@ -9,7 +8,6 @@ class Homepage extends Component {
     if (userType === "PM") {
       return (
         <div className = "center">
-          <Sidebar />
           <h1>Your Programs</h1>
 
           <table>
@@ -28,7 +26,6 @@ class Homepage extends Component {
     } else if (userType === "CC") {
       return (
         <div className = "center">
-          <Sidebar />
           <h1>Your Courses</h1>
 
           <table>
@@ -45,7 +42,6 @@ class Homepage extends Component {
     } else if (userType === "PMCC") {
       return (
         <div className = "center">
-          <Sidebar />
           <h1>Your Programs</h1>
 
           <table>

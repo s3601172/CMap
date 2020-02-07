@@ -1,23 +1,9 @@
 import React ,{Component} from 'react';
-import {BrowserRouter as Router, Route,Switch,Link} from 'react-router-dom'
-import "./ProgramDetails.css"
+import {Link} from "react-router-dom";
 
-class Pd extends Component{
-    render() {
-        return(
-            <div className="Pd">
-                <Router>
-                   <Switch>
-                        <Route path="/programCourseDetail" component={ProgramCourse}/>
-                        <Route path="/programDetail" component={ProgramDetail}/>
-                    </Switch>
-                </Router>
-            </div>
-        )
-    }
-}
+import "./ProgramDetails.css";
 
-class ProgramDetail extends Component{
+class ProgramDetails extends Component{
     constructor(props){
         super(props)
         this.state = {
@@ -63,12 +49,4 @@ class ProgramDetail extends Component{
     }
 }
 
-class ProgramCourse extends Component{
-    render() {
-        return (
-            <div>ProgramCourse</div>
-        )
-    }
-}
-
-export default Pd;
+export default ProgramDetails;
