@@ -8,7 +8,7 @@ import ProgramCourseList from "./programCourseList/ProgramCourseList";
 import CourseList from "./courseList/CourseList";
 import CourseDetails from "./coursedetails/CourseDetails";
 import TopicList from "./topicList/TopicList";
-import AddTopic from "./addtopic/addTopic";
+import AddTopic from "./addtopic/Addtopic";
 
 function CMap(){
     return(
