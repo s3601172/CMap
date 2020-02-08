@@ -1,52 +1,50 @@
-import React from "react";
-import "./CourseList.css";
-import { CourseTypeMenu, ToBeTakenMenu, AllocateToMenu} from "./DropdownMenu";
+import React, {Component} from "react";
+import SearchableTable from "../searchableTable/SearchableTable";
+import CourseService from "../API/course/CourseService.js";
 
-function CourseList() {
-  return (
-    <div className="center">
-      <h1>P1 Bachelor of IT</h1>
-      <table>
-        <tr>
-          <th>Course ID</th>
-          <th>Course Name</th>
-          <th>Course Type</th>
-          <th>To Be Taken</th>
-          <th>Allocate To</th>
-          <th>Select</th>
-        </tr>
+import "../../bootstrap.css";
 
-        <tr>
-          <td>C56</td>
-          <td>Advanced Programming Techniques</td>
-          <td><CourseTypeMenu /></td>
-          <td><ToBeTakenMenu /></td>
-          <td><AllocateToMenu /></td>
-          <td><input type="checkbox"></input></td>
-        </tr>
+const columns = [
+    { Header: "Course Code", accessor: "courseCode" },
+    { Header: "Course Name", accessor: "courseName"},
+    { Header: "To be taken", accessor: "tobetaken" }
+  ];
+  
+  class CourseList extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+          courseList: []
+        };
+    }
+  
+    componentDidMount() {
+      this.refreshList();
+    }
+  
+    refreshList() {
+      CourseService.getTopicList().then(response=>{
+        this.setState({
+          courseList: response.data
+        })
+      })
+    }
+  
+    addCourseBtn(){
+      this.props.history.push("/add-course");
+    }
+  
+    render() {
+      return (
+        <div className="centre">
+          <h1>Course List</h1>
+          <SearchableTable columns={columns} data={this.state.courseList} />
+          <button className="btn btn-outline-dark" type="submit">
+            Add Course
+          </button>
+        </div>
+      );
+    }
+  }
 
-        <tr>
-          <td>C23</td>
-          <td>Programming Internet of Things</td>
-          <td><CourseTypeMenu /></td>
-          <td><ToBeTakenMenu /></td>
-          <td><AllocateToMenu /></td>
-          <td><input type="checkbox"></input></td>
-        </tr>
-
-        <tr>
-          <td>C297</td>
-          <td>Database Concepts</td>
-          <td><CourseTypeMenu /></td>
-          <td><ToBeTakenMenu /></td>
-          <td><AllocateToMenu /></td>
-          <td><input type="checkbox"></input></td>
-        </tr>
-      </table>
-
-      <button type="button"> Allocate Course</button>
-    </div>
-  );
-}
-
-export default CourseList;
+  export default CourseList;

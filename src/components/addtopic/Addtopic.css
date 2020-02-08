@@ -1,6 +1,5 @@
-  
-.centre{
-    text-align: center;
+body{
+    margin: 0;
 }
 
 table{
@@ -14,4 +13,8 @@ table{
 
 table, th, td{
     border: 2px solid black;
+}
+
+.center{
+    text-align: center;
 }

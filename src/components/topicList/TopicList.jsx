@@ -1,21 +1,25 @@
 import React, { Component } from "react";
-import { Datatable } from "@o2xp/react-datatable";
-import TopicService from "../API/topic/TopicService.js"
-import PublishIcon from "@material-ui/icons/Publish";
-import axios from "axios";
+import TopicService from "../API/topic/TopicService.js";
 
 import "../../bootstrap.css";
 import "../../index.css";
 
+import SearchableTable from "../searchableTable/SearchableTable";
+
+const columns = [
+  { Header: "Body of Knowledge Reference", accessor: "bokRef" },
+  { Header: "Area", accessor: "area" },
+  { Header: "Unit", accessor: "unit" },
+  { Header: "Topic ID", accessor: "id" },
+  { Header: "Topic", accessor: "topic" }
+];
+
 class TopicList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      option: {}
-    };
-    this.refreshList = this.refreshList.bind(this);
-    this.getOption = this.getOption.bind(this);
-    this.postTopic = this.postTopic.bind(this);
+  constructor(props){
+      super(props);
+      this.state = {
+        topicList: []
+      };
   }
 
   componentDidMount() {
@@ -23,92 +27,25 @@ class TopicList extends Component {
   }
 
   refreshList() {
-    TopicService.getTopicList().then(response => {
-      let resData = response.data;
+    TopicService.getTopicList().then(response=>{
       this.setState({
-        option: this.getOption(resData)
-      });
-    });
+        topicList: response.data
+      })
+    })
   }
 
-  postTopic(rowData) {
-    let topicCode = rowData[0].id;
-    axios
-      .post("http://localhost:8080/add-course-topic", {topicCode})
-      .then(response => {
-        console.log(response);
-        console.log(response.data);
-      }
-      );
-      this.props.history.push("/course-details");
-  }
-
-  getOption(data) {
-    let options = {
-      keyColumn: "id",
-      data: {
-        columns: [
-          {
-            id: "bokRef",
-            label: "Book of Knowledge Reference",
-            colSize: "80px"
-          },
-          {
-            id: "area",
-            label: "Knowledge Area",
-            colSize: "150px"
-          },
-          {
-            id: "unit",
-            label: "Knowledge Unit",
-            colSize: "50px"
-          },
-          {
-            id: "id",
-            label: "Topic ID",
-            colSize: "50px"
-          },
-          {
-            id: "topic",
-            label: "Topic Name",
-            colSize: "50px"
-          },
-          {
-            id: "outcomeLevel",
-            label: "Outcome Level",
-            colSize: "50px"
-          },
-          {
-            id: "preReqLevel",
-            label: "Prerequisite Level",
-            colSize: "50px"
-          }
-        ],
-        rows: data
-      },
-      features: {
-        canSelectRow: true,
-        canSearch: true,
-        selectionIcons: [
-          {
-            title: "Add Topic(/s)",
-            icon: <PublishIcon color="primary" />,
-            onClick: rows => this.postTopic(rows)
-          }
-        ]
-      }
-    };
-
-    return options;
+  addTopicBtn(){
+    this.props.history.push("/add-topic");
   }
 
   render() {
     return (
-      <div className="container">
-        <div className="container centre bm-4">
-          <h1>Topic List</h1>
-        </div>
-        <Datatable options={this.state.option} />
+      <div className="centre">
+        <h1>Topic List</h1>
+        <SearchableTable columns={columns} data={this.state.topicList} />
+        <button className="btn btn-outline-dark" type="submit">
+          Add Topic
+        </button>
       </div>
     );
   }
