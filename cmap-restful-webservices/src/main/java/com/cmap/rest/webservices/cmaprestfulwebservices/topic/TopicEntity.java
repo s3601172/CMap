@@ -33,6 +33,62 @@ public class TopicEntity {
 	@Column(name = "requirement")
 	public String preReqLevel;
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getBokRef() {
+		return bokRef;
+	}
+
+	public void setBokRef(String bokRef) {
+		this.bokRef = bokRef;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
+	public String getTopic() {
+		return topic;
+	}
+
+	public void setTopic(String topic) {
+		this.topic = topic;
+	}
+
+	public String getOutcomeLevel() {
+		return outcomeLevel;
+	}
+
+	public void setOutcomeLevel(String outcomeLevel) {
+		this.outcomeLevel = outcomeLevel;
+	}
+
+	public String getPreReqLevel() {
+		return preReqLevel;
+	}
+
+	public void setPreReqLevel(String preReqLevel) {
+		this.preReqLevel = preReqLevel;
+	}
+
 	public TopicEntity() {
 		
 	}
