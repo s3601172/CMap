@@ -1,6 +1,6 @@
 import React , {Component} from 'react';
 import {Select, MenuItem} from "@material-ui/core";
-import "./addTopic.css"
+import "./Addtopic.css"
 
 class AddTopic extends Component{
     constructor(props){
