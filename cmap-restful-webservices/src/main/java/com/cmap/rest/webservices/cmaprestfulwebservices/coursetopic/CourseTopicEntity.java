@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class CourseTopicEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "course_topic_code")
+	@Column(name = "course_topic_id")
 	public int courseTopicId;
 	
 	@Column(name="course_code")
@@ -29,7 +29,6 @@ public class CourseTopicEntity {
 		this.topicCode = topicCode;
 	}
 	
-
 	public int getCourseTopicId() {
 		return courseTopicId;
 	}
