@@ -66,7 +66,7 @@ class TopicList extends Component {
           {
             id: "bokRef",
             label: "Book of Knowledge Reference",
-            colSize: "80px"
+            colSize: "100px"
           },
           {
             id: "area",
@@ -86,7 +86,7 @@ class TopicList extends Component {
           {
             id: "topic",
             label: "Topic Name",
-            colSize: "150px"
+            colSize: "400px"
           }
         ],
         rows: data
@@ -107,7 +107,8 @@ class TopicList extends Component {
           height:"120px"
         },
         datatable:{
-          height: "1200px"
+          height: "1200px",
+          width: "1200px"
         }
       }
     };
