@@ -97,7 +97,7 @@ class TopicList extends Component {
         selectionIcons: [
           {
             title: "Add Topic(/s)",
-            icon: <PublishIcon color="primary" />,
+            icon: <button className="btn btn-outline-primary">Add Topic(/s)</button>,
             onClick: rows => this.postTopic(rows)
           }
         ]
