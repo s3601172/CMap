@@ -5,32 +5,39 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SecondaryTable;
+import javax.persistence.SecondaryTables;
 import javax.persistence.Table;
 
 @Entity
 @Table(name= "std_topic")
+@SecondaryTables({
+	@SecondaryTable(name="std_ku"),
+	@SecondaryTable(name="std_ka"),
+	@SecondaryTable(name="std_guidelines")
+})
 public class TopicEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "topic_code")
+	@Column(name = "topic_code", table="std_topic")
 	public String id;
 	
-	@Column(name = "guideline")
+	@Column(name = "name", table="std_guidelines")
 	public String bokRef;
 	
-	@Column(name ="ka")
+	@Column(name ="title", table="std_ka")
 	public String area;
 	
-	@Column(name = "ku")
+	@Column(name = "title", table="std_ku")
 	public String unit;
 	
-	@Column(name = "title")
+	@Column(name = "title", table="std_topic")
 	public String topic;
 	
-	@Column(name = "level")
+	@Column(name = "level", table="std_topic")
 	public String outcomeLevel;
 	
-	@Column(name = "requirement")
+	@Column(name = "requirement", table="std_topic")
 	public String preReqLevel;
 	
 	public String getId() {
