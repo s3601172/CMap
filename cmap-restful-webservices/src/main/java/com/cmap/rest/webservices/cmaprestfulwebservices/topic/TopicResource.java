@@ -15,6 +15,6 @@ public class TopicResource {
 	
 	@GetMapping("topic-list")
 	public List<TopicEntity> getTopicList(){
-		return topicDB.findAll();	
+		return topicDB.getTopics();
 	}
 }

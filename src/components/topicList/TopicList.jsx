@@ -16,6 +16,7 @@ class TopicList extends Component {
     this.refreshList = this.refreshList.bind(this);
     this.getOption = this.getOption.bind(this);
     this.postTopic = this.postTopic.bind(this);
+    this.postRequest = this.postRequest.bind(this);
   }
 
   componentDidMount() {
@@ -32,15 +33,29 @@ class TopicList extends Component {
   }
 
   postTopic(rowData) {
-    let topicCode = rowData[0].id;
-    axios
-      .post("http://localhost:8080/add-course-topic", {topicCode})
-      .then(response => {
-        console.log(response);
-        console.log(response.data);
+    let selectedLength = rowData.length;
+    let data = rowData;
+
+    if (selectedLength > 1){
+      var i;
+      for(i = 0; i < selectedLength; i++){
+        this.postRequest(data[i]);
       }
-      );
-      this.props.history.push("/course-details");
+    }else{
+      this.postRequest(data[0]);
+    }
+
+    // this.props.history.push("/course-details");
+  }
+
+  postRequest(data){
+    axios
+    .post("http://localhost:8080/add-course-topic", data)
+    .then(response => {
+      console.log(response);
+      console.log(response.data);
+    }
+    );
   }
 
   getOption(data) {
@@ -51,7 +66,7 @@ class TopicList extends Component {
           {
             id: "bokRef",
             label: "Book of Knowledge Reference",
-            colSize: "80px"
+            colSize: "100px"
           },
           {
             id: "area",
@@ -61,7 +76,7 @@ class TopicList extends Component {
           {
             id: "unit",
             label: "Knowledge Unit",
-            colSize: "50px"
+            colSize: "150px"
           },
           {
             id: "id",
@@ -71,17 +86,7 @@ class TopicList extends Component {
           {
             id: "topic",
             label: "Topic Name",
-            colSize: "50px"
-          },
-          {
-            id: "outcomeLevel",
-            label: "Outcome Level",
-            colSize: "50px"
-          },
-          {
-            id: "preReqLevel",
-            label: "Prerequisite Level",
-            colSize: "50px"
+            colSize: "400px"
           }
         ],
         rows: data
@@ -92,10 +97,19 @@ class TopicList extends Component {
         selectionIcons: [
           {
             title: "Add Topic(/s)",
-            icon: <PublishIcon color="primary" />,
+            icon: <button className="btn btn-outline-primary">Add Topic(/s)</button>,
             onClick: rows => this.postTopic(rows)
           }
         ]
+      },
+      dimensions:{
+        row:{
+          height:"120px"
+        },
+        datatable:{
+          height: "1200px",
+          width: "1200px"
+        }
       }
     };
 
@@ -108,7 +122,7 @@ class TopicList extends Component {
         <div className="container centre bm-4">
           <h1>Topic List</h1>
         </div>
-        <Datatable options={this.state.option} />
+        <Datatable options={this.state.option}/>
       </div>
     );
   }
