@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { Datatable } from "@o2xp/react-datatable";
-import CourseService from "../API/programCourse/ProgramCourseService.js"
+import { Link} from "react-router-dom";
 import PublishIcon from "@material-ui/icons/Publish";
-import axios from "axios";
-
 import "../../bootstrap.css";
 import "../../index.css";
 import ProgramCourseService from "../API/programCourse/ProgramCourseService.js";
+
 
 class ProgramCourseList extends Component {
   constructor(props) {
@@ -16,8 +15,10 @@ class ProgramCourseList extends Component {
     };
     this.refreshList = this.refreshList.bind(this);
     this.getOption = this.getOption.bind(this);
-    this.postCourse = this.postCourse.bind(this);
-    this.postRequest = this.postRequest.bind(this);
+    this.deleteCourse = this.deleteCourse.bind(this);
+    this.deleteRequest = this.deleteRequest.bind(this);
+    this.updateCourse = this.updateCourse.bind(this);
+    this.updateRequest = this.updateRequest.bind(this);
   }
 
   componentDidMount() {
@@ -33,25 +34,51 @@ class ProgramCourseList extends Component {
     });
   }
 
-  postCourse(rowData) {
+  deleteCourse(rowData) {
     let selectedLength = rowData.length;
     let data = rowData;
     
     if (selectedLength > 1){
       var i;
       for(i = 0; i < selectedLength; i++){
-        this.postRequest(data[i]);
+        this.deleteRequest(data[i]);
       }
     }else{
       console.log(data);
-      this.postRequest(data[0]);
+      this.deleteRequest(data[0]);
     }
 
-    // this.props.history.push("/course-details");
+     this.props.history.push("/program-course-list");
   }
 
-  postRequest(data){
-    CourseService.addCourse(data)
+  deleteRequest(data){
+    ProgramCourseService.deleteCourse(data)
+    .then(response => {
+      console.log(response);
+      console.log(response.data);
+    }
+    );
+  }
+
+  updateCourse(rowData) {
+    let selectedLength = rowData.length;
+    let data = rowData;
+    
+    if (selectedLength > 1){
+      var i;
+      for(i = 0; i < selectedLength; i++){
+        this.updateRequest(data[i]);
+      }
+    }else{
+      console.log(data);
+      this.updateRequest(data[0]);
+    }
+
+    this.refreshList()
+  }
+
+  updateRequest(data){
+    ProgramCourseService.updateCourse(data)
     .then(response => {
       console.log(response);
       console.log(response.data);
@@ -77,19 +104,27 @@ class ProgramCourseList extends Component {
           {
             id: "semester",
             label: "Semester",
+            editable: true,
             colSize: "150px"
           }
         ],
         rows: data
       },
       features: {
+        canEdit: true,
         canSelectRow: true,
         canSearch: true,
         selectionIcons: [
           {
-            title: "Add Course(/s)",
-            icon: <PublishIcon color="primary" />,
-            onClick: rows => this.postCourse(rows)
+            title: "Update Course(/s)",
+            icon: <button className="btn btn-outline-success">Update Course(/s)</button>,
+            onClick: rows => this.updateCourse(rows)
+            
+          },
+          {
+            title: "Delete Course(/s)",
+            icon: <button className="btn btn-outline-warning">Delete Course(/s)</button>,
+            onClick: rows => this.deleteCourse(rows)
             
           }
         ]
@@ -111,9 +146,13 @@ class ProgramCourseList extends Component {
     return (
       <div className="container">
         <div className="container centre bm-4">
-          <h1>Course List</h1>
+          <h1>Program Course List</h1>
         </div>
         <Datatable options={this.state.option}/>
+        <div className="container centre bm-4">
+          <Link to="/course-list"><button  className="btn btn-outline-primary">Add Course</button></Link>
+        </div>
+        
       </div>
     );
   }
