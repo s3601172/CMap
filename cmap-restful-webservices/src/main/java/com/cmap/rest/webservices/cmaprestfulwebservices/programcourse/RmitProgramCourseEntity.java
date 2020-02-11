@@ -1,12 +1,12 @@
-package com.CmapProject.Cmap.program_course;
+package com.CmapProject.Cmap.programcourse;
 
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-
-
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
@@ -14,31 +14,28 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="rmit_program_course")
-
 public class RmitProgramCourseEntity  {
 	
 	@EmbeddedId
-	private RmitProgramCourseId programCourseID;
+	private RmitProgramCoursePk programCourseID;
 
 
-	
 	protected RmitProgramCourseEntity(){
 		
 	}
 
-	public RmitProgramCourseEntity(RmitProgramCourseId programCourseID) {
+	public RmitProgramCourseEntity(RmitProgramCoursePk programCourseID) {
 		super();
 		this.programCourseID = programCourseID;
 		
-		//this.title = title;
 	}
 
-	public RmitProgramCourseId getProgramCourseID() {
+	public RmitProgramCoursePk getProgramCourseID() {
 		return programCourseID;
 	}
 
 
-	public void setProgramCourseID(RmitProgramCourseId programCourseID) {
+	public void setProgramCourseID(RmitProgramCoursePk programCourseID) {
 		this.programCourseID = programCourseID;
 	}
 	

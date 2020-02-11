@@ -1,4 +1,4 @@
-package com.CmapProject.Cmap.program_course;
+package com.CmapProject.Cmap.programcourse;
 import java.net.URI;
 import java.util.List;
 
@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.CmapProject.Cmap.course.RmitCourses;
+import com.CmapProject.Cmap.programcoursebo.RmitProgramCourseBo;
+import com.CmapProject.Cmap.programcoursebo.RmitProgramCourseBoJpaRepository;
 
 
 @RestController
@@ -27,26 +29,13 @@ public class RmitProgramCourseJpaResource {
 	@Autowired
 	private RmitProgramCourseJpaRepository rmitProgramJpaRespository;
 	
-	@Autowired
-	private RmitProgramCourseBoJpaRepository rmitProgramBoJpaRespository;
+		
 	
-	@GetMapping("/courseCode/{courseCode}/programCode/{programCode}")	
-	public List<RmitProgramCourseEntity> getOneProgramTodo(@PathVariable String courseCode, @PathVariable String programCode){
-		RmitProgramCourseId programcourseId = new RmitProgramCourseId("COSC1076",2,"BP094GEN8");
-		return rmitProgramJpaRespository.findByProgramCourseID(programcourseId);
-		//return todoService.findAll();
-	}
 	
-	@GetMapping("/allCourseinProgram/{programCode}")
-	public List<RmitProgramCourseBo> getAllCourseinProgram(@PathVariable String programCode){
-		return rmitProgramBoJpaRespository.findAllCourseByProgram(programCode);
-		//return todoService.findAll();
-	}
-	
-	// cannot get year from rmit course table
+	// cannot get semester from rmit course table
 	@DeleteMapping("/deletecoursefromprogram/courseCode/{courseCode}/programCode/{programCode}")
 	public ResponseEntity<Void> deleteTodo(@PathVariable String courseCode,	@PathVariable String programCode){
-		RmitProgramCourseId programcourseId = new RmitProgramCourseId("COSC1076",2,"BP094GEN8");
+		RmitProgramCoursePk programcourseId = new RmitProgramCoursePk("COSC1076",2,"BP094GEN8");
 		rmitProgramJpaRespository.deleteById(programcourseId); 
 
 		return ResponseEntity.noContent().build();
@@ -56,12 +45,13 @@ public class RmitProgramCourseJpaResource {
 	
 	@PostMapping(path="/add-program-course", consumes = "application/json", produces = "application/json")
 	public  void addProgramCourse(@RequestBody RmitCourses rmitCourse) {
-		RmitProgramCourseId programcourseId = new RmitProgramCourseId();
+		RmitProgramCoursePk programcourseId = new RmitProgramCoursePk();
 		//System.out.println(rmitCourse.getcourseCode());
+		RmitProgramCourseEntity rpc = new RmitProgramCourseEntity();
 		programcourseId.setCourseCode(rmitCourse.getcourseCode());
 		programcourseId.setProgramCode("BP094GEN8");
-		programcourseId.setYear(0);
-		RmitProgramCourseEntity rpc = new RmitProgramCourseEntity();
+		programcourseId.setsemester(0);
+		//RmitProgramCourseEntity rpc = new RmitProgramCourseEntity();
 		rpc.setProgramCourseID(programcourseId);
 		//System.out.println(rpc);
 		rmitProgramJpaRespository.save(rpc);

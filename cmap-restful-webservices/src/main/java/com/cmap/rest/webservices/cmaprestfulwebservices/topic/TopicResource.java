@@ -1,4 +1,4 @@
-package com.cmap.rest.webservices.cmaprestfulwebservices.topic;
+package com.CmapProject.Cmap.topic;
 
 import java.util.List;
 
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins="http://localhost:3000")
 public class TopicResource {
 	@Autowired
-	private TopicService topicService;
+	private TopicRepository topicDB;
 	
 	@GetMapping("topic-list")
-	public List<Topic> getTopicList(){
-		return topicService.getTopicList();	
+	public List<TopicEntity> getTopicList(){
+		return topicDB.findAll();	
 	}
 }
