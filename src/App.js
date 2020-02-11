@@ -1,10 +1,10 @@
 import React from 'react';
-// import Homepage from "./components/homepage/Homepage";
-import ProgramCourseList from "./components/programCourseList/ProgramCourseList";
+
+import CMap from "./components/CMap";
 
 function App() {
   return (
-     <ProgramCourseList />
+    <CMap />
   );
 }
 
