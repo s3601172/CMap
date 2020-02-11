@@ -46,7 +46,7 @@ class CourseList extends Component {
       this.postRequest(data[0]);
     }
 
-    // this.props.history.push("/course-details");
+     this.props.history.push("/program-course-list");
   }
 
   postRequest(data){
@@ -87,7 +87,7 @@ class CourseList extends Component {
         selectionIcons: [
           {
             title: "Add Course(/s)",
-            icon: <PublishIcon color="primary" />,
+            icon: <button className="btn btn-outline-primary">Add Course(/s)</button>,
             onClick: rows => this.postCourse(rows)
             
           }
