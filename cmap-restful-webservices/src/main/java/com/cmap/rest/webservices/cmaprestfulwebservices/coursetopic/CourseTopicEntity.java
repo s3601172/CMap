@@ -1,29 +1,31 @@
-package com.CmapProject.Cmap.coursetopic;
+package com.cmap.rest.webservices.cmaprestfulwebservices.coursetopic;
 
-import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 @Entity
+@Table(name="rmit_course_topic")
 public class CourseTopicEntity {
-	@Id
-	@Column(name="course_code")
-	public String courseCode;
 	
-	@Column(name="topic_code")
-	public String topicCode;
+	@EmbeddedId
+	public CourseTopicId courseTopicId;
 
-	public CourseTopicEntity(){
+	public CourseTopicEntity() {};	
+	
+	public CourseTopicEntity(CourseTopicId courseTopicId) {
+		super();
+		this.courseTopicId = courseTopicId;
 	}
-	
-	public CourseTopicEntity(String courseCode, String topicCode) {
-		this.courseCode = courseCode;
-		this.topicCode = topicCode;
+
+	public CourseTopicId getCourseTopicId() {
+		return courseTopicId;
 	}
-	
-	
-	
-	
-	
+
+	public void setCourseTopicId(CourseTopicId courseTopicId) {
+		this.courseTopicId = courseTopicId;
+	}
 
 }
+

@@ -6,15 +6,14 @@ import Homepage from "./homepage/Homepage";
 import ProgramDetails from "./programDetails/ProgramDetails";
 import ProgramCourseList from "./programCourseList/ProgramCourseList";
 import CourseList from "./courseList/CourseList";
-import CourseDetails from "./coursedetails/CourseDetails";
+import CourseDetails from "./courseDetails/CourseDetails";
 import TopicList from "./topicList/TopicList";
-import AddTopic from "./addtopic/Addtopic";
 
 function CMap(){
     return(
         <div>
         <Router>
-            <Sidebar/>
+            <Sidebar name='pm' />
             <Switch>
                 <Route path="/" exact component={Homepage}/>
                 <Route path="/homepage" component={Homepage}/>
@@ -23,7 +22,6 @@ function CMap(){
                 <Route path="/course-list" component={CourseList}/>
                 <Route path="/course-details" component={CourseDetails}/>
                 <Route path="/topic-list" component={TopicList}/>
-                <Route path="/add-Topic" component={AddTopic}/>
             </Switch>
         </Router>
       </div>

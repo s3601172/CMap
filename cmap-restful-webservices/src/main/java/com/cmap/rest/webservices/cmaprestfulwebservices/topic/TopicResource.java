@@ -1,4 +1,4 @@
-package com.CmapProject.Cmap.topic;
+package com.cmap.rest.webservices.cmaprestfulwebservices.topic;
 
 import java.util.List;
 
@@ -15,6 +15,6 @@ public class TopicResource {
 	
 	@GetMapping("topic-list")
 	public List<TopicEntity> getTopicList(){
-		return topicDB.findAll();	
+		return topicDB.getTopics();
 	}
 }
