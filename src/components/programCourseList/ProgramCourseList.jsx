@@ -76,6 +76,7 @@ class ProgramCourseList extends Component {
           {
             id: "semester",
             label: "Semester",
+            editable: true,
             colSize: "150px"
           }
         ],
@@ -84,6 +85,7 @@ class ProgramCourseList extends Component {
       features: {
         canSelectRow: true,
         canSearch: true,
+        canEdit: true,
         selectionIcons: [
           {
             title: "Add Course(/s)",
