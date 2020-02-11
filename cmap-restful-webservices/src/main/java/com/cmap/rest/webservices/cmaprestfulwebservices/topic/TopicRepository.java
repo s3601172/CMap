@@ -1,3 +1,5 @@
+import org.springframework.data.jpa.repository.JpaRepository;
+
 package com.cmap.rest.webservices.cmaprestfulwebservices.topic;
 
 import java.util.List;
@@ -15,3 +17,4 @@ public interface TopicRepository extends JpaRepository<TopicEntity, String>{
 			"AND std_ka.id_guidelines = std_guidelines.id;", nativeQuery = true)
 	List<TopicEntity> getTopics();
 }
+

@@ -10,3 +10,4 @@ public interface CourseTopicRepository extends JpaRepository<CourseTopicEntity, 
 	
 }
 
+

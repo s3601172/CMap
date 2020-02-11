@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import { Datatable } from "@o2xp/react-datatable";
 import TopicService from "../API/topic/TopicService.js"
 import PublishIcon from "@material-ui/icons/Publish";
@@ -116,7 +117,7 @@ class TopicList extends Component {
     return options;
   }
 
-  render() {
+ render() {
     return (
       <div className="container">
         <div className="container centre bm-4">
