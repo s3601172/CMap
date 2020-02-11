@@ -1,4 +1,4 @@
-package com.CmapProject.Cmap.programcoursebo;
+package com.cmap.rest.webservices.cmaprestfulwebservices.programcoursebo;
 
 
 import javax.persistence.Column;
@@ -9,9 +9,7 @@ import javax.persistence.IdClass;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
-import com.CmapProject.Cmap.programcourse.RmitProgramCoursePk;
-
-
+import com.cmap.rest.webservices.cmaprestfulwebservices.programcourse.RmitProgramCoursePk;
 
 @Entity
 @Table(name="rmit_program_course")

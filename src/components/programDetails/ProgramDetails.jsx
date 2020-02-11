@@ -1,52 +1,70 @@
-import React ,{Component} from 'react';
-import {Link} from "react-router-dom";
+import React, { Component } from "react";
+import { Datatable } from "@o2xp/react-datatable";
 
+import ProgramService from "../API/program/ProgramService.js";
 import "./ProgramDetails.css";
 
-class ProgramDetails extends Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            todos :
-            [
-                {ProgramID:'P1',ProgramName:'Bachelor of IT' ,StandardDutation:8, DegreeType:'Undergraduate'}
-            ]
-        }
-    }
-    render() {
-        return (
-            <div className ="center">
-                <h1>Program Detail</h1>
-                <div className="container">
-                    <table className="table table-bordered">
-                        <thead className="thead-dark">
-                            <tr>
-                                <th>ProgramID</th>
-                                <th>ProgramName</th>
-                                <th>StandardDuration</th>
-                                <th>DegreeType</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                this.state.todos.map(
-                                    todo =>
-                                        <tr>
-                                            <td>{todo.ProgramID}</td>
-                                            <td>{todo.ProgramName}</td>
-                                            <td>{todo.StandardDuration}</td>
-                                            <td>{todo.DegreeType}</td>
-                                        </tr>
-                                )
-                            }
+class ProgramDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      option: {}
+    };
+    this.refreshList = this.refreshList.bind(this);
+  }
 
-                        </tbody>
-                    </table>
-                    <Link to="/programCourseDetail"><button className="btn btn-outline-primary" >View Courses Alllocated to this Program </button> </Link>
-                </div>
-            </div>
-        )
-    }
+  componentDidMount() {
+    this.refreshList();
+  }
+
+  refreshList() {
+    ProgramService.getProgramList().then(response => {
+      let resData = response.data;
+      this.setState({
+        option: this.getOption(resData)
+      });
+    });
+  }
+
+  getOption(data) {
+    let options = {
+      keyColumn: "programID.code",
+      data: {
+        columns: [
+          {
+            id: "programID.code",
+            label: "Program Code",
+            colSize: "100px"
+          },
+          {
+            id: "name",
+            label: "Program Name",
+            colSize: "150px"
+          },
+          {
+            id: "target",
+            label: "Program Target",
+            colSize: "150px"
+          }
+        ],
+        rows: data
+      }
+    };
+
+    return options;
+  }
+
+  render() {
+    return (
+      <div className="container centre">
+        <div className="container centre bm-4">
+          <h1>Program Details</h1>
+        </div>
+        <Datatable options={this.state.option} />
+        <button className="btn btn-outline-dark">View Courses Allocated to this Program</button>
+      </div>
+    );
+  }
 }
 
 export default ProgramDetails;

@@ -40,7 +40,8 @@ function Sidebar(name) {
         </ExpansionPanelDetails></Link>
         </ExpansionPanel>
       </ListItem>
-}
+      }
+
       {/* <ListItem button>
         <ExpansionPanel>
           <ExpansionPanelSummary>View Program Details</ExpansionPanelSummary>
@@ -94,6 +95,8 @@ function Sidebar(name) {
       }
 
       <Link to ="/topic-list"><ListItem button> View Course Topics </ListItem></Link>
+      </List>
+      </Menu>);
 }
 
 export default Sidebar
