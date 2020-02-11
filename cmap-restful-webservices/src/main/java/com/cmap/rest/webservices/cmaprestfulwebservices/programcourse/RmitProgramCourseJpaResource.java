@@ -30,18 +30,35 @@ public class RmitProgramCourseJpaResource {
 	private RmitProgramCourseJpaRepository rmitProgramJpaRespository;
 	
 		
-	
-	
-	// cannot get semester from rmit course table
-	@DeleteMapping("/deletecoursefromprogram/courseCode/{courseCode}/programCode/{programCode}")
-	public ResponseEntity<Void> deleteTodo(@PathVariable String courseCode,	@PathVariable String programCode){
-		RmitProgramCoursePk programcourseId = new RmitProgramCoursePk("COSC1076",2,"BP094GEN8");
-		rmitProgramJpaRespository.deleteById(programcourseId); 
+	@DeleteMapping("/delete-program-course")
+	public ResponseEntity<Void> deleteCourse(@RequestBody RmitProgramCourseBo rmitProgramCourseBo){
+		RmitProgramCoursePk programcourseId = new RmitProgramCoursePk();
+		RmitProgramCourseEntity rpc = new RmitProgramCourseEntity();
+		programcourseId.setCourseCode(rmitProgramCourseBo.getCourseCode());
+		System.out.println(programcourseId.getCourseCode());
+		programcourseId.setProgramCode("BP094GEN8");
+		programcourseId.setsemester(rmitProgramCourseBo.getsemester());
+		rpc.setProgramCourseID(programcourseId);
+		rmitProgramJpaRespository.deleteById(programcourseId);;
 
 		return ResponseEntity.noContent().build();
 		
 	}
 	
+	@PutMapping("/update-program-course")
+	public ResponseEntity<RmitProgramCourseEntity> updateTodo(@RequestBody RmitProgramCourseBo rmitProgramCourseBo){
+		RmitProgramCoursePk programcourseId = new RmitProgramCoursePk();
+		RmitProgramCourseEntity rpc = new RmitProgramCourseEntity();
+		programcourseId.setCourseCode(rmitProgramCourseBo.getCourseCode());
+		System.out.println(programcourseId.getCourseCode());
+		programcourseId.setProgramCode("BP094GEN8");
+		programcourseId.setsemester(rmitProgramCourseBo.getsemester());
+		rpc.setProgramCourseID(programcourseId);
+		
+		
+		RmitProgramCourseEntity todoUpdated = rmitProgramJpaRespository.save(rpc);
+		return new ResponseEntity<RmitProgramCourseEntity> (rpc,HttpStatus.OK);
+	}
 	
 	@PostMapping(path="/add-program-course", consumes = "application/json", produces = "application/json")
 	public  void addProgramCourse(@RequestBody RmitCourses rmitCourse) {

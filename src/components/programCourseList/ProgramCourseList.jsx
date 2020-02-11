@@ -48,7 +48,7 @@ class ProgramCourseList extends Component {
       this.deleteRequest(data[0]);
     }
 
-     this.props.history.push("/program-course-list");
+    this.refreshList()
   }
 
   deleteRequest(data){
@@ -72,6 +72,7 @@ class ProgramCourseList extends Component {
     }else{
       console.log(data);
       this.updateRequest(data[0]);
+      this.refreshList()
     }
 
     this.refreshList()
