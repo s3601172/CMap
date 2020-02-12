@@ -45,7 +45,7 @@ class TopicList extends Component {
       this.postRequest(data[0]);
     }
 
-    // this.props.history.push("/course-details");
+    this.props.history.push("/course-details");
   }
 
   postRequest(data){
