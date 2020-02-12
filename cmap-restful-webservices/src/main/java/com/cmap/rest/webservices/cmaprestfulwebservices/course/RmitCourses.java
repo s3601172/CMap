@@ -1,5 +1,5 @@
 package com.CmapProject.Cmap.course;
-
+ 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
