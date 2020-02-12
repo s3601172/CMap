@@ -1,4 +1,6 @@
-package com.CmapProject.Cmap.programcourse;
+package com.cmap.rest.webservices.cmaprestfulwebservices.programcourse;
+import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,11 +12,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.CmapProject.Cmap.course.RmitCourses;
 import com.CmapProject.Cmap.programcoursebo.RmitProgramCourseBo;
 
-
+import com.cmap.rest.webservices.cmaprestfulwebservices.course.RmitCourses;
 
 @RestController
 @CrossOrigin(origins="http://localhost:3000")

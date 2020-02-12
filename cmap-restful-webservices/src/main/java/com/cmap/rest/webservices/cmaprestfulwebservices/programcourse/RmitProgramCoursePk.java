@@ -1,4 +1,4 @@
-package com.CmapProject.Cmap.programcourse;
+package com.cmap.rest.webservices.cmaprestfulwebservices.programcourse;
 
 import java.io.Serializable;
 

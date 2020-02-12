@@ -1,10 +1,8 @@
-package com.CmapProject.Cmap.course;
+package com.cmap.rest.webservices.cmaprestfulwebservices.course;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.CmapProject.Cmap.programcourse.*;
 @Repository
 public interface RmitCourseJpaRepository extends JpaRepository<RmitCourses,String> {
 	List<RmitCourses> findByCourseCode(String courseCode);

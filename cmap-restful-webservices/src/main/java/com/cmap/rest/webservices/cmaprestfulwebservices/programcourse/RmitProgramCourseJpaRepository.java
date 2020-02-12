@@ -1,5 +1,4 @@
-package com.CmapProject.Cmap.programcourse;
-import java.util.List;
+package com.cmap.rest.webservices.cmaprestfulwebservices.programcourse;
 
 import javax.transaction.Transactional;
 
@@ -23,7 +22,4 @@ public interface RmitProgramCourseJpaRepository extends JpaRepository<RmitProgra
 	@Query(value="delete from rmit_program_course rpc where rpc.semester=?1 and rpc.course_code=?2 and rpc.program_code=?3"
 			 ,nativeQuery = true)
 	void deleteProgramCourse(int semester,String coursecode,String programCode);	
-
-	
-	
 }

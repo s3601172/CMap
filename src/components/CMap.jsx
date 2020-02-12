@@ -13,7 +13,7 @@ function CMap(){
     return(
         <div>
         <Router>
-            <Sidebar name='pm' />
+            <Sidebar name='superadmin' />
             <Switch>
                 <Route path="/" exact component={Homepage}/>
                 <Route path="/homepage" component={Homepage}/>

@@ -1,4 +1,4 @@
-package com.CmapProject.Cmap.course;
+package com.cmap.rest.webservices.cmaprestfulwebservices.course;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

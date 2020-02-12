@@ -1,12 +1,12 @@
-package com.CmapProject.Cmap.programcoursebo;
+package com.cmap.rest.webservices.cmaprestfulwebservices.programcoursebo;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import com.CmapProject.Cmap.course.*;
-import com.CmapProject.Cmap.program.*;
-import com.CmapProject.Cmap.programcourse.RmitProgramCoursePk;
+
+import com.cmap.rest.webservices.cmaprestfulwebservices.programcourse.RmitProgramCoursePk;
+
 @Repository
 public interface RmitProgramCourseBoJpaRepository extends JpaRepository<RmitProgramCourseBo,RmitProgramCoursePk> {
 	

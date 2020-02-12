@@ -16,6 +16,10 @@ const userList = [{
 {
   name: 'user2',
   userType:'coursecoordinator'
+},
+{
+  name: 'user3',
+  userType: 'superadmin'
 }]
 
 function Sidebar(name) {
@@ -25,7 +29,7 @@ function Sidebar(name) {
       <Link to="/Homepage"><ListItem Button> Username </ListItem></Link>
       <Link to="/Homepage"><ListItem button> Dashboard </ListItem></Link>
 
-      {name && name.name === 'pm' && <ListItem button>
+      {name && name.name === 'superadmin' && <ListItem button>
         <ExpansionPanel>
           <ExpansionPanelSummary>View Program Details</ExpansionPanelSummary>
           <Link to= "/program-details"><ExpansionPanelDetails>
@@ -57,7 +61,7 @@ function Sidebar(name) {
         </ExpansionPanel>
       </ListItem> */}
 
-      {name && name.name === 'pm' && <ListItem button>
+      {name && name.name === 'superadmin' && <ListItem button>
         <ExpansionPanel>
           <ExpansionPanelSummary>View Program Courses</ExpansionPanelSummary>
         <Link to ="/program-courses"><ExpansionPanelDetails>
@@ -74,7 +78,7 @@ function Sidebar(name) {
       </ListItem>
       }
 
-      {name && name.name === 'coursecoordinator' && <ListItem button>
+      {name && name.name === 'superadmin' && <ListItem button>
         <ExpansionPanel>
         <ExpansionPanelSummary>
             View Course Details
@@ -98,5 +102,4 @@ function Sidebar(name) {
     </Menu>
   )
 }
-
 export default Sidebar

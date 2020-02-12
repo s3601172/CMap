@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import { Datatable } from "@o2xp/react-datatable";
 import TopicService from "../API/topic/TopicService.js"
-import PublishIcon from "@material-ui/icons/Publish";
 import axios from "axios";
 
 import "../../bootstrap.css";
@@ -46,7 +45,7 @@ class TopicList extends Component {
       this.postRequest(data[0]);
     }
 
-    // this.props.history.push("/course-details");
+    this.props.history.push("/course-details");
   }
 
   postRequest(data){
