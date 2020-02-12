@@ -11,6 +11,7 @@ class ProgramDetails extends Component {
       option: {}
     };
     this.refreshList = this.refreshList.bind(this);
+    this.reRoute = this.reRoute.bind(this);
   }
 
   componentDidMount() {
@@ -24,6 +25,10 @@ class ProgramDetails extends Component {
         option: this.getOption(resData)
       });
     });
+  }
+
+  reRoute(){
+    this.props.history.push("/course-list");
   }
 
   getOption(data) {
@@ -61,7 +66,7 @@ class ProgramDetails extends Component {
           <h1>Program Details</h1>
         </div>
         <Datatable options={this.state.option} />
-        <button className="btn btn-outline-dark">View Courses Allocated to this Program</button>
+        <button onClick={this.reRoute} className="btn btn-outline-dark">View Courses Allocated to this Program</button>
       </div>
     );
   }
