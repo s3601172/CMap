@@ -43,12 +43,14 @@ class ProgramCourseList extends Component {
       for(i = 0; i < selectedLength; i++){
         this.deleteRequest(data[i]);
       }
+      this.refreshList()
     }else{
       console.log(data);
       this.deleteRequest(data[0]);
+      this.refreshList()
     }
 
-    this.refreshList()
+    
   }
 
   deleteRequest(data){
@@ -69,13 +71,14 @@ class ProgramCourseList extends Component {
       for(i = 0; i < selectedLength; i++){
         this.updateRequest(data[i]);
       }
+      this.refreshList()
     }else{
       console.log(data);
       this.updateRequest(data[0]);
       this.refreshList()
     }
 
-    this.refreshList()
+    
   }
 
   updateRequest(data){
