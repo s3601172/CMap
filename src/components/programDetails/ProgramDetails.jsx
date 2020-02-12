@@ -21,35 +21,41 @@ class ProgramDetails extends Component {
   refreshList() {
     ProgramService.getProgramList().then(response => {
       let resData = response.data;
+
+      let expandData = [{
+        code: resData[0].programID.code,
+        year: resData[0].programID.year,
+        name: resData[0].name,
+        target: resData[0].target
+      }];
+
       this.setState({
-        option: this.getOption(resData)
+
+        option: this.getOption(expandData)
       });
     });
   }
 
   reRoute(){
-    this.props.history.push("/course-list");
+    this.props.history.push("/program-course-list");
   }
 
   getOption(data) {
     let options = {
-      keyColumn: "programID.code",
+      keyColumn: "code",
       data: {
         columns: [
           {
-            id: "programID.code",
+            id: "code",
             label: "Program Code",
-            colSize: "100px"
           },
           {
             id: "name",
             label: "Program Name",
-            colSize: "150px"
           },
           {
             id: "target",
             label: "Program Target",
-            colSize: "150px"
           }
         ],
         rows: data
