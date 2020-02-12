@@ -2,9 +2,6 @@ package com.cmap.rest.webservices.cmaprestfulwebservices.programcoursebo;
 
 import java.io.Serializable;
 
-import javax.persistence.Embeddable;
-
-//@Embeddable
 public class RmitProgramCourseId implements Serializable{
 	private String courseCode;
 	
