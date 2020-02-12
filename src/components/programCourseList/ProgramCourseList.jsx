@@ -71,14 +71,14 @@ class ProgramCourseList extends Component {
       for(i = 0; i < selectedLength; i++){
         this.updateRequest(data[i]);
       }
-      this.refreshList()
+      
     }else{
       console.log(data);
       this.updateRequest(data[0]);
-      this.refreshList()
+     
     }
 
-    
+    this.props.history.push("/program-course-list");
   }
 
   updateRequest(data){
