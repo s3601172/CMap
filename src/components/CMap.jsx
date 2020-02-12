@@ -6,14 +6,14 @@ import Homepage from "./homepage/Homepage";
 import ProgramDetails from "./programDetails/ProgramDetails";
 import ProgramCourseList from "./programCourseList/ProgramCourseList";
 import CourseList from "./courseList/CourseList";
-import CourseDetails from "./courseDetails/CourseDetails";
+import CourseDetails from "./courseDetails/courseDetails";
 import TopicList from "./topicList/TopicList";
 
 function CMap(){
     return(
         <div>
         <Router>
-            <Sidebar name='pm' />
+            <Sidebar name='superadmin' />
             <Switch>
                 <Route path="/" exact component={Homepage}/>
                 <Route path="/homepage" component={Homepage}/>
