@@ -1,52 +1,121 @@
-import React from "react";
-import "./CourseList.css";
-import { CourseTypeMenu, ToBeTakenMenu, AllocateToMenu} from "./DropdownMenu";
+import React, { Component } from "react";
+import { Datatable } from "@o2xp/react-datatable";
+import CourseService from "../API/course/CourseService.js"
+import PublishIcon from "@material-ui/icons/Publish";
+import axios from "axios";
 
-function CourseList() {
-  return (
-    <div className="center">
-      <h1>P1 Bachelor of IT</h1>
-      <table>
-        <tr>
-          <th>Course ID</th>
-          <th>Course Name</th>
-          <th>Course Type</th>
-          <th>To Be Taken</th>
-          <th>Allocate To</th>
-          <th>Select</th>
-        </tr>
+import "../../bootstrap.css";
+import "../../index.css";
 
-        <tr>
-          <td>C56</td>
-          <td>Advanced Programming Techniques</td>
-          <td><CourseTypeMenu /></td>
-          <td><ToBeTakenMenu /></td>
-          <td><AllocateToMenu /></td>
-          <td><input type="checkbox"></input></td>
-        </tr>
+class CourseList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      option: {}
+    };
+    this.refreshList = this.refreshList.bind(this);
+    this.getOption = this.getOption.bind(this);
+    this.postCourse = this.postCourse.bind(this);
+    this.postRequest = this.postRequest.bind(this);
+  }
 
-        <tr>
-          <td>C23</td>
-          <td>Programming Internet of Things</td>
-          <td><CourseTypeMenu /></td>
-          <td><ToBeTakenMenu /></td>
-          <td><AllocateToMenu /></td>
-          <td><input type="checkbox"></input></td>
-        </tr>
+  componentDidMount() {
+    this.refreshList();
+  }
 
-        <tr>
-          <td>C297</td>
-          <td>Database Concepts</td>
-          <td><CourseTypeMenu /></td>
-          <td><ToBeTakenMenu /></td>
-          <td><AllocateToMenu /></td>
-          <td><input type="checkbox"></input></td>
-        </tr>
-      </table>
+  refreshList() {
+    CourseService.getCourseList().then(response => {
+      let resData = response.data;
+      this.setState({
+        option: this.getOption(resData)
+      });
+    });
+  }
 
-      <button type="button"> Allocate Course</button>
-    </div>
-  );
+  postCourse(rowData) {
+    let selectedLength = rowData.length;
+    let data = rowData;
+    
+    if (selectedLength > 1){
+      var i;
+      for(i = 0; i < selectedLength; i++){
+        this.postRequest(data[i]);
+      }
+    }else{
+      console.log(data);
+      this.postRequest(data[0]);
+    }
+
+    // this.props.history.push("/course-details");
+  }
+
+  postRequest(data){
+    CourseService.addCourse(data)
+    .then(response => {
+      console.log(response);
+      console.log(response.data);
+    }
+    );
+  }
+
+  getOption(data) {
+    let options = {
+      keyColumn: "courseCode",
+      data: {
+        columns: [
+          {
+            id: "courseCode",
+            label: "Course Code",
+            colSize: "50px"
+          },
+          {
+            id: "title",
+            label: "Course Name",
+            colSize: "150px"
+          },
+          {
+            id: "credits",
+            label: "Credits",
+            colSize: "150px"
+          }
+        ],
+        rows: data
+      },
+      features: {
+        canSelectRow: true,
+        canSearch: true,
+        selectionIcons: [
+          {
+            title: "Add Course(/s)",
+            icon: <PublishIcon color="primary" />,
+            onClick: rows => this.postCourse(rows)
+            
+          }
+        ]
+      },
+      dimensions:{
+        row:{
+          height:"120px"
+        },
+        datatable:{
+          height: "1200px"
+        }
+      }
+    };
+
+    return options;
+  }
+
+  render() {
+    return (
+      <div className="container">
+        <div className="container centre bm-4">
+          <h1>Course List</h1>
+        </div>
+        <Datatable options={this.state.option}/>
+      </div>
+    );
+  }
 }
 
 export default CourseList;

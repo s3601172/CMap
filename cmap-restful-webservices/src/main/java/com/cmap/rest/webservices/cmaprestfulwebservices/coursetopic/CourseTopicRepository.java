@@ -11,3 +11,4 @@ public interface CourseTopicRepository extends JpaRepository<CourseTopicEntity, 
 	CourseTopicEntity findByCourseCode(String courseCode, String topicCode);
 }
 
+

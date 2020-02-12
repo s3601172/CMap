@@ -94,20 +94,5 @@ public class TopicEntity {
 
 	public void setPreReqLevel(String preReqLevel) {
 		this.preReqLevel = preReqLevel;
-	}
-
-	public TopicEntity() {
-		
-	}
-
-	public TopicEntity(String id, String unit, String topic, String outcomeLevel, String preReqLevel) {
-		this.id = id;
-		this.unit = unit;
-		this.topic = topic;
-		this.outcomeLevel = outcomeLevel;
-		this.preReqLevel = preReqLevel;
-	}
-
-
-	
+	}	
 }
