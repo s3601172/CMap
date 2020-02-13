@@ -17,4 +17,12 @@ public class TopicResource {
 	public List<TopicEntity> getTopicList(){
 		return topicDB.getTopics();
 	}
+	
+	@GetMapping("coursedetail-topic")
+	public List<TopicEntity> getCourseTopicList(){
+		String courseCode = "C1111";
+		List<TopicEntity> courseTopicList = topicDB.getCourseDetails(courseCode);
+		
+		return courseTopicList;
+	}
 }
