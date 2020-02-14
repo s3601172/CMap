@@ -11,10 +11,12 @@ class CourseDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      option: {}
+      option: {},
+      topicDetails: []
     };
     this.refreshList = this.refreshList.bind(this);
     this.getOption = this.getOption.bind(this);
+    this.getTopics = this.getTopics.bind(this);
   }
 
   componentDidMount() {
@@ -23,14 +25,29 @@ class CourseDetails extends Component {
 
   refreshList() {
     CourseService.getCourseDetails().then(response => {
-      return TopicService.getTopicDetails(
-        response.data[0].courseTopicId.topicCode
-      ).then(response => {
-        this.setState({
-          option: response.data
-        })
-      });
+      let resData = response.data;
+      var topicCodeList = [];
+
+      for (var i = 0; i < resData.length; i++) {
+        topicCodeList.push(resData[i].courseTopicId.topicCode);
+      }
+
+      this.getTopics(topicCodeList);
     });
+  }
+
+  getTopics(data) {
+    let topicDetails = [];
+
+    for (var i = 0; i < data.length; i++) {
+      TopicService.getTopicDetails(data[i]).then(response => {
+        topicDetails.push(response.data);
+        //bad code re-renders multiple times
+        this.setState({
+          option: this.getOption(topicDetails)
+        });
+      });
+    }
   }
 
   getOption(data) {
@@ -61,15 +78,21 @@ class CourseDetails extends Component {
           {
             id: "topic",
             label: "Topic Name",
-            colSize: "400px"
+            colSize: "20px"
           },
           {
             id: "preReqLevel",
-            label: "Prerequisite Level"
+            label: "Prerequisite Level",
+            editable: true,
+            inputType: "select",
+            values: ["None Required", "Remembering", "Understanding", "Applying", "Analayzing", "Evaluating", "Creating"]
           },
           {
             id: "outcomeLevel",
-            label: "Outcome Level"
+            label: "Outcome Level",
+            editable: true,
+            inputType: "select",
+            values: ["Remembering", "Understanding", "Applying", "Analayzing", "Evaluating", "Creating"]
           }
         ],
         rows: data
@@ -77,24 +100,19 @@ class CourseDetails extends Component {
       features: {
         canSelectRow: true,
         canSearch: true,
+        canEdit: true,
         selectionIcons: [
           {
-            title: "Add Topic(/s)",
-            icon: (
-              <button className="btn btn-outline-primary">Add Topic(/s)</button>
-            ),
-            onClick: rows => this.postTopic(rows)
+            title: "Remove Topics",
+            icon: <button className="btn btn-outline-danger">Remove Topic</button>,
+            onClick: rows => console.log(rows)
+          },
+          {
+            title: "Save Changes",
+            icon: <button className="btn btn-outline-primary">Save Changes</button>,
+            onClick: rows => console.log(rows)
           }
         ]
-      },
-      dimensions: {
-        row: {
-          height: "120px"
-        },
-        datatable: {
-          height: "1200px",
-          width: "1200px"
-        }
       }
     };
 
@@ -106,9 +124,10 @@ class CourseDetails extends Component {
       <div className="container">
         <div className="container centre bm-4">
           <h1>C1111 Dummy Course</h1>
-        </div>
-        <Datatable options={this.state.option} />
-      </div>
+          <Datatable options={this.state.option} />
+          <button className="btn btn-outline-primary">Add New Topic</button>
+          </div>
+      </div>  
     );
   }
 }
