@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,14 +16,11 @@ public class TopicResource {
 	
 	@GetMapping("topic-list")
 	public List<TopicEntity> getTopicList(){
-		return topicDB.getTopics();
+		return topicDB.getTopicList();
 	}
 	
-	@GetMapping("coursedetail-topic")
-	public List<TopicEntity> getCourseTopicList(){
-		String courseCode = "C1111";
-		List<TopicEntity> courseTopicList = topicDB.getCourseDetails(courseCode);
-		
-		return courseTopicList;
+	@GetMapping("topic-details")
+	public TopicEntity getTopic(@RequestParam String topicCode) {
+		return topicDB.getTopic(topicCode);
 	}
 }

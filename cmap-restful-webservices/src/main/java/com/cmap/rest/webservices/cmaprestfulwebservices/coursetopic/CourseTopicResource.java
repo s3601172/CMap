@@ -1,5 +1,7 @@
 package com.cmap.rest.webservices.cmaprestfulwebservices.coursetopic;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cmap.rest.webservices.cmaprestfulwebservices.topic.TopicEntity;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins="http://localhost:3000")
 public class CourseTopicResource {
 	@Autowired
 	private CourseTopicRepository courseTopicDB;
@@ -43,5 +45,13 @@ public class CourseTopicResource {
 		} else {
 			return "Duplicate Entry";
 		}
+	}
+	
+	@GetMapping("course-details")
+	public List<CourseTopicEntity> getCourseTopicList(){
+		String courseCode = "C1111";
+		List<CourseTopicEntity> courseTopicList = courseTopicDB.getCourseDetails(courseCode);
+		
+		return courseTopicList;
 	}
 }
