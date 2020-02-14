@@ -7,12 +7,7 @@ class CourseService{
 
     addCourse(course){
         console.log('create')
-        return axios.post("http://localhost:8080/add-program-course",course); 
-      
-    }
-
-    getCourseDetails(){
-        return axios.get("http://localhost:8080/course-details");
+        return axios.post("http://localhost:8080/add-program-course",course);  
     }
 
 }

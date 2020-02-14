@@ -15,13 +15,14 @@ public interface TopicRepository extends JpaRepository<TopicEntity, String>{
 			"AND std_ku.ka = std_ka.ka_code \r\n" + 
 			"AND std_ka.id_guidelines = std_guidelines.id;", nativeQuery = true)
 	List<TopicEntity> getTopicList();
-	
-	@Query(value="SELECT std_guidelines.name, std_ka.title, std_ku.title, std_topic.topic_code, std_topic.level, std_topic.requirement \r\n" + 
-			"FROM std_guidelines, std_ka, std_ku, std_topic\r\n" + 
-			"WHERE std_topic.topic_code = ?1\r\n" +
-			"AND std_topic.ku = std_ku.ku_code \r\n" + 
-			"AND std_ku.ka = std_ka.ka_code \r\n" + 
-			"AND std_ka.id_guidelines = std_guidelines.id;", nativeQuery = true)
-	TopicEntity getTopic(String topicCode);
+
+	@Query(value="SELECT std_guidelines.name, std_ka.title, std_ku.title, rmit_course_topic.topic_code, rmit_course_topic.level, rmit_course_topic.requirement\r\n" + 
+			"			FROM std_guidelines, std_ka, std_ku, std_topic, rmit_course_topic\r\n" + 
+			"			WHERE rmit_course_topic.course_code = ?1 \r\n" + 
+			"            AND rmit_course_topic.topic_code = std_topic.topic_code\r\n" + 
+			"			AND std_topic.ku = std_ku.ku_code\r\n" + 
+			"			AND std_ku.ka = std_ka.ka_code\r\n" + 
+			"			AND std_ka.id_guidelines = std_guidelines.id;", nativeQuery = true)
+	List<TopicEntity> getCourseTopicDetails(String courseCode);
 	}
 

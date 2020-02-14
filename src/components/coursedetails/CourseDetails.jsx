@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import { Datatable } from "@o2xp/react-datatable";
 import TopicService from "../API/topic/TopicService.js";
-import CourseService from "../API/course/CourseService.js";
 
 import "../../bootstrap.css";
 import "../../index.css";
@@ -12,11 +11,9 @@ class CourseDetails extends Component {
     super(props);
     this.state = {
       option: {},
-      topicDetails: []
     };
     this.refreshList = this.refreshList.bind(this);
     this.getOption = this.getOption.bind(this);
-    this.getTopics = this.getTopics.bind(this);
   }
 
   componentDidMount() {
@@ -24,30 +21,11 @@ class CourseDetails extends Component {
   }
 
   refreshList() {
-    CourseService.getCourseDetails().then(response => {
-      let resData = response.data;
-      var topicCodeList = [];
-
-      for (var i = 0; i < resData.length; i++) {
-        topicCodeList.push(resData[i].courseTopicId.topicCode);
-      }
-
-      this.getTopics(topicCodeList);
+    TopicService.getCourseTopicList("C1111").then(response =>{
+      this.setState({
+        option: this.getOption(response.data)
+      })
     });
-  }
-
-  getTopics(data) {
-    let topicDetails = [];
-
-    for (var i = 0; i < data.length; i++) {
-      TopicService.getTopicDetails(data[i]).then(response => {
-        topicDetails.push(response.data);
-        //bad code re-renders multiple times
-        this.setState({
-          option: this.getOption(topicDetails)
-        });
-      });
-    }
   }
 
   getOption(data) {
@@ -85,14 +63,14 @@ class CourseDetails extends Component {
             label: "Prerequisite Level",
             editable: true,
             inputType: "select",
-            values: ["None Required", "Remembering", "Understanding", "Applying", "Analayzing", "Evaluating", "Creating"]
+            values: ["None Required(0)", "Remembering(1)", "Understanding(2)", "Applying(3)", "Analyzing(4)", "Evaluating(5)", "Creating(6)"]
           },
           {
             id: "outcomeLevel",
             label: "Outcome Level",
             editable: true,
             inputType: "select",
-            values: ["Remembering", "Understanding", "Applying", "Analayzing", "Evaluating", "Creating"]
+            values: ["Remembering(1)", "Understanding(2)", "Applying(3)", "Analyzing(4)", "Evaluating(5)", "Creating(6)"]
           }
         ],
         rows: data
@@ -105,11 +83,6 @@ class CourseDetails extends Component {
           {
             title: "Remove Topics",
             icon: <button className="btn btn-outline-danger">Remove Topic</button>,
-            onClick: rows => console.log(rows)
-          },
-          {
-            title: "Save Changes",
-            icon: <button className="btn btn-outline-primary">Save Changes</button>,
             onClick: rows => console.log(rows)
           }
         ]
@@ -126,6 +99,7 @@ class CourseDetails extends Component {
           <h1>C1111 Dummy Course</h1>
           <Datatable options={this.state.option} />
           <button className="btn btn-outline-primary">Add New Topic</button>
+          <button className="btn btn-outline-primary">Save Changes</button>
           </div>
       </div>  
     );

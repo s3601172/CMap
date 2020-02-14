@@ -5,10 +5,10 @@ class TopicService {
     return axios.get("http://localhost:8080/topic-list");
   }
 
-  getTopicDetails(courseTopic) {
-    return axios.get("http://localhost:8080/topic-details", {
+  getCourseTopicList(courseCode) {
+    return axios.get("http://localhost:8080/course-topic-details", {
       params: {
-        "topicCode": courseTopic
+        "courseCode": courseCode
       }
     });
   }
