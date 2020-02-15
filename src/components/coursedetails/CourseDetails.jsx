@@ -10,10 +10,11 @@ class CourseDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      option: {},
+      option: {}
     };
     this.refreshList = this.refreshList.bind(this);
     this.getOption = this.getOption.bind(this);
+    this.saveChanges = this.saveChanges.bind(this);
   }
 
   componentDidMount() {
@@ -21,11 +22,16 @@ class CourseDetails extends Component {
   }
 
   refreshList() {
-    TopicService.getCourseTopicList("C1111").then(response =>{
+    TopicService.getCourseTopicList("C1111").then(response => {
       this.setState({
         option: this.getOption(response.data)
-      })
+      });
+      console.log(response.data);
     });
+  }
+
+  saveChanges(tableData){
+    console.log(tableData);
   }
 
   getOption(data) {
@@ -63,14 +69,29 @@ class CourseDetails extends Component {
             label: "Prerequisite Level",
             editable: true,
             inputType: "select",
-            values: ["None Required(0)", "Remembering(1)", "Understanding(2)", "Applying(3)", "Analyzing(4)", "Evaluating(5)", "Creating(6)"]
+            values: [
+              "None Required(0)",
+              "Remembering(1)",
+              "Understanding(2)",
+              "Applying(3)",
+              "Analyzing(4)",
+              "Evaluating(5)",
+              "Creating(6)"
+            ]
           },
           {
             id: "outcomeLevel",
             label: "Outcome Level",
             editable: true,
             inputType: "select",
-            values: ["Remembering(1)", "Understanding(2)", "Applying(3)", "Analyzing(4)", "Evaluating(5)", "Creating(6)"]
+            values: [
+              "Remembering(1)",
+              "Understanding(2)",
+              "Applying(3)",
+              "Analyzing(4)",
+              "Evaluating(5)",
+              "Creating(6)"
+            ]
           }
         ],
         rows: data
@@ -82,7 +103,9 @@ class CourseDetails extends Component {
         selectionIcons: [
           {
             title: "Remove Topics",
-            icon: <button className="btn btn-outline-danger">Remove Topic</button>,
+            icon: (
+              <button className="btn btn-outline-danger">Remove Topic</button>
+            ),
             onClick: rows => console.log(rows)
           }
         ]
@@ -97,11 +120,11 @@ class CourseDetails extends Component {
       <div className="container">
         <div className="container centre bm-4">
           <h1>C1111 Dummy Course</h1>
-          <Datatable options={this.state.option} />
-          <button className="btn btn-outline-primary">Add New Topic</button>
-          <button className="btn btn-outline-primary">Save Changes</button>
-          </div>
-      </div>  
+        </div>
+        <Datatable options={this.state.option} />
+        <button className="btn btn-outline-primary">Add New Topic</button>
+        <button onClick={() => this.saveChanges(this.state.option.data.rows)} className="btn btn-outline-primary">Save Changes</button>
+      </div>
     );
   }
 }

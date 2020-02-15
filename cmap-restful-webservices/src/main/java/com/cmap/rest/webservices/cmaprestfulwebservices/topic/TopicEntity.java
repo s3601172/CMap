@@ -2,8 +2,6 @@ package com.cmap.rest.webservices.cmaprestfulwebservices.topic;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SecondaryTable;
 import javax.persistence.SecondaryTables;
@@ -18,8 +16,7 @@ import javax.persistence.Table;
 })
 public class TopicEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "topic_code", table="std_topic")
+	@Column(name = "topic_code")
 	public String id;
 	
 	@Column(name = "name", table="std_guidelines")
@@ -31,13 +28,13 @@ public class TopicEntity {
 	@Column(name = "title", table="std_ku")
 	public String unit;
 	
-	@Column(name = "title", table="std_topic")
+	@Column(name = "title")
 	public String topic;
 	
-	@Column(name = "level", table="std_topic")
+	@Column(name = "level")
 	public String outcomeLevel;
 	
-	@Column(name = "requirement", table="std_topic")
+	@Column(name = "requirement")
 	public String preReqLevel;
 	
 	public String getId() {

@@ -34,4 +34,20 @@ public class CourseTopicEntity {
 		this.courseTopicId = courseTopicId;
 	}
 
+	public String getOutcomeLevel() {
+		return outcomeLevel;
+	}
+
+	public void setOutcomeLevel(String outcomeLevel) {
+		this.outcomeLevel = outcomeLevel;
+	}
+
+	public String getPreReqLevel() {
+		return preReqLevel;
+	}
+
+	public void setPreReqLevel(String preReqLevel) {
+		this.preReqLevel = preReqLevel;
+	}
+
 }

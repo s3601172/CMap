@@ -34,8 +34,11 @@ public class CourseTopicResource {
 		CourseTopicId newCourseTopicId = new CourseTopicId();
 		newCourseTopicId.setCourseCode("C1111");
 		newCourseTopicId.setTopicCode(topicEntity.getId());
-
-		CourseTopicEntity newCourseTopic = new CourseTopicEntity(newCourseTopicId);
+		
+		CourseTopicEntity newCourseTopic = new CourseTopicEntity();
+		newCourseTopic.setCourseTopicId(newCourseTopicId);
+		newCourseTopic.setOutcomeLevel(topicEntity.getOutcomeLevel());
+		newCourseTopic.setPreReqLevel(topicEntity.getPreReqLevel());
 
 		boolean courseSearch = getCourseTopic("C1111", topicEntity.getId());
 
