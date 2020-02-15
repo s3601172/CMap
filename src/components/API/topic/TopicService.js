@@ -8,7 +8,7 @@ class TopicService {
   getCourseTopicList(courseCode) {
     return axios.get("http://localhost:8080/course-topic-details", {
       params: {
-        "courseCode": courseCode
+        "courseCode": courseCode            
       }
     });
   }

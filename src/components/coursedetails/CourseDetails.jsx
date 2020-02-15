@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import { Datatable } from "@o2xp/react-datatable";
 import TopicService from "../API/topic/TopicService.js";
+import CourseService from "../API/course/CourseService.js";
 
 import "../../bootstrap.css";
 import "../../index.css";
@@ -30,8 +31,16 @@ class CourseDetails extends Component {
     });
   }
 
-  saveChanges(tableData){
-    console.log(tableData);
+  saveChanges(rows){
+    CourseService.getCourseTopicLevel("C1111", rows[0].id).then(response => {
+      if ((rows[0].outcomeLevel === response.data[0].outcomeLevel) && (rows[0].preReqLevel === response.data[0].preReqLevel)){
+        console.log("No Changes: Data is the same");
+      } else{
+        CourseService.updateCourseTopicLevel(rows[0]).then(response =>{
+          console.log("Updated");
+        });
+      }
+    })
   }
 
   getOption(data) {
@@ -42,31 +51,32 @@ class CourseDetails extends Component {
           {
             id: "bokRef",
             label: "Book of Knowledge Reference",
-            colSize: "100px"
+            colSize: "25px"
           },
           {
             id: "area",
             label: "Knowledge Area",
-            colSize: "150px"
+            colSize: "15px"
           },
           {
             id: "unit",
             label: "Knowledge Unit",
-            colSize: "150px"
+            colSize: "15px"
           },
           {
             id: "id",
             label: "Topic ID",
-            colSize: "50px"
+            colSize: "7px"
           },
           {
             id: "topic",
             label: "Topic Name",
-            colSize: "20px"
+            colSize: "30px"
           },
           {
             id: "preReqLevel",
             label: "Prerequisite Level",
+            colSize: "10px",
             editable: true,
             inputType: "select",
             values: [
@@ -82,6 +92,7 @@ class CourseDetails extends Component {
           {
             id: "outcomeLevel",
             label: "Outcome Level",
+            colSize:"10px",
             editable: true,
             inputType: "select",
             values: [
@@ -96,11 +107,22 @@ class CourseDetails extends Component {
         ],
         rows: data
       },
+      dimensions:{
+        datatable:{
+          width: "100%",
+          height: "950px"
+        }
+      },
       features: {
         canSelectRow: true,
         canSearch: true,
         canEdit: true,
         selectionIcons: [
+          {
+            title: "Save Changes",
+            icon:(<button className="btn btn-outline-primary">Save Changes</button>),
+            onClick: rows => this.saveChanges(rows)
+          },
           {
             title: "Remove Topics",
             icon: (
@@ -117,13 +139,14 @@ class CourseDetails extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
         <div className="container centre bm-4">
           <h1>C1111 Dummy Course</h1>
         </div>
         <Datatable options={this.state.option} />
-        <button className="btn btn-outline-primary">Add New Topic</button>
-        <button onClick={() => this.saveChanges(this.state.option.data.rows)} className="btn btn-outline-primary">Save Changes</button>
+        <div className="container centre mt-4">
+          <button className="btn btn-outline-primary">Add New Topic</button>
+        </div>
       </div>
     );
   }

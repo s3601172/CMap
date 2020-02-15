@@ -12,8 +12,9 @@ public interface CourseTopicRepository extends JpaRepository<CourseTopicEntity, 
 	
 	@Query(value="SELECT *\n" + 
             "FROM rmit_course_topic\n" + 
-            "WHERE rmit_course_topic.course_code = ?1\n", nativeQuery = true)
-	List<CourseTopicEntity> getCourseDetails(String courseCode);
+            "WHERE rmit_course_topic.course_code = ?1\n" +
+            "AND rmit_course_topic.topic_code = ?2", nativeQuery = true)
+	List<CourseTopicEntity> getCourseTopicLevel(String courseCode, String topicCode);
 }
 
 

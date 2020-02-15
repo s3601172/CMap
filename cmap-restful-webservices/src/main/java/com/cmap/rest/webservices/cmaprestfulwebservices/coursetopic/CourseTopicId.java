@@ -40,4 +40,35 @@ public class CourseTopicId implements Serializable{
 	public void setTopicCode(String topicCode) {
 		this.topicCode = topicCode;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((courseCode == null) ? 0 : courseCode.hashCode());
+		result = prime * result + ((topicCode == null) ? 0 : topicCode.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CourseTopicId other = (CourseTopicId) obj;
+		if (courseCode == null) {
+			if (other.courseCode != null)
+				return false;
+		} else if (!courseCode.equals(other.courseCode))
+			return false;
+		if (topicCode == null) {
+			if (other.topicCode != null)
+				return false;
+		} else if (!topicCode.equals(other.topicCode))
+			return false;
+		return true;
+	}
 }

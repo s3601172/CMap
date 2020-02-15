@@ -22,10 +22,10 @@ public class TopicEntity {
 	@Column(name = "name", table="std_guidelines")
 	public String bokRef;
 	
-	@Column(name ="title", table="std_ka")
+	@Column(name ="ka_title", table="std_ka")
 	public String area;
 	
-	@Column(name = "title", table="std_ku")
+	@Column(name = "ku_title", table="std_ku")
 	public String unit;
 	
 	@Column(name = "title")
@@ -91,5 +91,30 @@ public class TopicEntity {
 
 	public void setPreReqLevel(String preReqLevel) {
 		this.preReqLevel = preReqLevel;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TopicEntity other = (TopicEntity) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}	
 }

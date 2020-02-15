@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,11 +51,25 @@ public class CourseTopicResource {
 		}
 	}
 	
-	@GetMapping("course-details")
-	public List<CourseTopicEntity> getCourseTopicList(){
-		String courseCode = "C1111";
-		List<CourseTopicEntity> courseTopicList = courseTopicDB.getCourseDetails(courseCode);
+	@GetMapping("course-topic-level")
+	public List<CourseTopicEntity> getCourseTopicList(@RequestParam String courseCode, @RequestParam String topicCode){
+		List<CourseTopicEntity> courseTopicList = courseTopicDB.getCourseTopicLevel(courseCode, topicCode);
 		
 		return courseTopicList;
+	}
+	
+	@PutMapping("update-course-topic")
+	public @ResponseBody String updateCourseTopic(@RequestBody TopicEntity topicEntity) {
+		String topicCode = topicEntity.getId();
+		String preReqLevel = topicEntity.getPreReqLevel();
+		String outcomeLevel = topicEntity.getOutcomeLevel();
+		
+		CourseTopicEntity courseTopic = courseTopicDB.findByCourseCode("C1111", topicCode);
+		courseTopic.setPreReqLevel(preReqLevel);
+		courseTopic.setOutcomeLevel(outcomeLevel);
+		
+		courseTopicDB.save(courseTopic);
+		
+		return "Updated";
 	}
 }
