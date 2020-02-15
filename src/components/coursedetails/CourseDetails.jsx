@@ -32,15 +32,17 @@ class CourseDetails extends Component {
   }
 
   saveChanges(rows){
-    CourseService.getCourseTopicLevel("C1111", rows[0].id).then(response => {
-      if ((rows[0].outcomeLevel === response.data[0].outcomeLevel) && (rows[0].preReqLevel === response.data[0].preReqLevel)){
-        console.log("No Changes: Data is the same");
-      } else{
-        CourseService.updateCourseTopicLevel(rows[0]).then(response =>{
-          console.log("Updated");
-        });
-      }
-    })
+    for(let topicDetails of rows){
+      CourseService.getCourseTopicLevel("C1111", topicDetails.id).then(response => {
+        if ((topicDetails.outcomeLevel === response.data[0].outcomeLevel) && (topicDetails.preReqLevel === response.data[0].preReqLevel)){
+          console.log("No Changes: Data is the same");
+        } else{
+          CourseService.updateCourseTopicLevel(topicDetails).then(response =>{
+            console.log("Updated");
+          });
+        }
+      });
+    }
   }
 
   getOption(data) {
