@@ -44,13 +44,13 @@ public class RmitProgramCourseJpaResource {
 		
 	}
 	
-	@PutMapping("/update-program-course")
+		@PutMapping("/update-program-course")
 	public void updateCourseSemester(@RequestBody RmitProgramCourseBo rmitProgramCourseBo){
 		
 	
 		String courseCode = rmitProgramCourseBo.getCourseCode();
 		System.out.println(courseCode);
-		String programCode= "BP094GEN8";
+		String programCode= rmitProgramCourseBo.getProgramCode() ;
 		int semester=rmitProgramCourseBo.getsemester();
 		System.out.println(semester);
 		rmitProgramJpaRespository.updateCourseSemseter(semester, courseCode, programCode);

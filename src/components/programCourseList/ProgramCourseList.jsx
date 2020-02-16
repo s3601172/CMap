@@ -108,6 +108,8 @@ class ProgramCourseList extends Component {
             id: "semester",
             label: "Semester",
             editable: true,
+            inputType:"select",
+            values:[0,1,2,3,4,5,6],
             colSize: "150px"
           }
         ],
