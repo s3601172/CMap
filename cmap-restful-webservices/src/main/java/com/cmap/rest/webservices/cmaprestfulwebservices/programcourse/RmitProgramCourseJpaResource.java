@@ -1,21 +1,20 @@
 package com.cmap.rest.webservices.cmaprestfulwebservices.programcourse;
-import java.net.URI;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.CmapProject.Cmap.course.RmitCourses;
 import com.CmapProject.Cmap.programcoursebo.RmitProgramCourseBo;
 
-import com.cmap.rest.webservices.cmaprestfulwebservices.course.RmitCourses;
+
 
 @RestController
 @CrossOrigin(origins="http://localhost:3000")
@@ -24,20 +23,26 @@ public class RmitProgramCourseJpaResource {
 	private RmitProgramCourseJpaRepository rmitProgramJpaRespository;
 	
 		
-	@DeleteMapping("/delete-program-course")
-	public void deleteCourse(@RequestBody RmitProgramCourseBo rmitProgramCourseBo){
-		String courseCode = rmitProgramCourseBo.getCourseCode();
+	
+	   
+	
+	@DeleteMapping("/delete-program-course/{programCode}/{courseCode}/{semester}")
+	public ResponseEntity<Void> deleteTodo(@PathVariable String programCode,@PathVariable String courseCode,@PathVariable int semester ){
+		RmitProgramCoursePk programcourseId = new RmitProgramCoursePk();
+		programcourseId.setProgramCode(programCode);
+		programcourseId.setCourseCode(courseCode);
+		programcourseId.setsemester(semester);
 		System.out.println(courseCode);
-		String programCode= "BP094GEN8";
-		int semester=rmitProgramCourseBo.getsemester();
-		System.out.println(semester);
 		
-		rmitProgramJpaRespository.deleteProgramCourse(semester, courseCode, programCode);
-		System.out.println("delete");
+		
+		System.out.println(semester);		
+		
+		//rmitProgramJpaRespository.deleteProgramCourse(semester,courseCode , programCode);
+		rmitProgramJpaRespository.deleteById(programcourseId);
+		System.out.print("delete");
+		return ResponseEntity.noContent().build();
 		
 	}
-	
-
 	
 	@PutMapping("/update-program-course")
 	public void updateCourseSemester(@RequestBody RmitProgramCourseBo rmitProgramCourseBo){

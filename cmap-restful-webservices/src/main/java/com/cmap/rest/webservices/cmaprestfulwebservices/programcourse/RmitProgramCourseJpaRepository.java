@@ -17,9 +17,12 @@ public interface RmitProgramCourseJpaRepository extends JpaRepository<RmitProgra
 	void updateCourseSemseter(int semester,String coursecode,String programCode);	
 	
 	
-	@Modifying	
+/*	@Modifying	
 	@Transactional
 	@Query(value="delete from rmit_program_course rpc where rpc.semester=?1 and rpc.course_code=?2 and rpc.program_code=?3"
 			 ,nativeQuery = true)
 	void deleteProgramCourse(int semester,String coursecode,String programCode);	
+*/
+	
+	
 }
