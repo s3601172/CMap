@@ -16,6 +16,7 @@ class CourseDetails extends Component {
     this.refreshList = this.refreshList.bind(this);
     this.getOption = this.getOption.bind(this);
     this.saveChanges = this.saveChanges.bind(this);
+    this.removeTopic = this.removeTopic.bind(this);
   }
 
   componentDidMount() {
@@ -42,6 +43,14 @@ class CourseDetails extends Component {
           });
         }
       });
+    }
+  }
+
+  removeTopic(rows){
+    for(let topicDetails of rows){
+      CourseService.removeCourseTopic(topicDetails.id).then(response =>{
+        console.log(response.data);
+      })
     }
   }
 
@@ -130,7 +139,7 @@ class CourseDetails extends Component {
             icon: (
               <button className="btn btn-outline-danger">Remove Topic</button>
             ),
-            onClick: rows => console.log(rows)
+            onClick: rows => this.removeTopic(rows)
           }
         ]
       }
