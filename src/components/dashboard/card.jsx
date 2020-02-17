@@ -12,7 +12,7 @@ function Card(props){
                   <h6>{props.cardTitle}</h6>
                   {props.cardDesc}
                 </p>
-                <a href="program-details" class="btn btn-primary">{props.cardBtn}</a>
+                <a href={props.url} class="btn btn-primary">{props.cardBtn}</a>
                 </div>
               </div>
             </div>

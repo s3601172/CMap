@@ -37,6 +37,7 @@ class Homepage extends Component {
             cardHeader="Assigned Programs"
             cardTitle="Bachelor of Computer Science(BP094GEN8)"
             cardDesc="Undergraduate Computer Science Program"
+            url ="/program-details"
             cardBtn="Program Details"
           />
 
@@ -44,6 +45,7 @@ class Homepage extends Component {
             cardHeader="Assigned Courses"
             cardTitle="Dummy Course (C1111)"
             cardDesc="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+            url="/course-details"
             cardBtn="Course Details"
           />
         </div>
