@@ -156,7 +156,7 @@ class CourseDetails extends Component {
         </div>
         <Datatable options={this.state.option} />
         <div className="container centre mt-4">
-          <button className="btn btn-outline-primary">Add New Topic</button>
+          <a href="/topic-list" className="btn btn-outline-primary">Add New Topic</a>
         </div>
       </div>
     );

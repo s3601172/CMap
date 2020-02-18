@@ -80,6 +80,6 @@ public class CourseTopicResource {
 	public @ResponseBody String deleteCourseTopic(@RequestParam String topicCode){
 		CourseTopicEntity courseTopic = courseTopicDB.findByCourseCode("C1111", topicCode);
 		courseTopicDB.delete(courseTopic);
-		return "Deleted";
+		return "Deleted"	 ;
 	}
 }
