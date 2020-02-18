@@ -72,7 +72,7 @@ class ProgramDetails extends Component {
           <h1>Program Details</h1>
         </div>
         <Datatable options={this.state.option} />
-        <button onClick={this.reRoute} className="btn btn-outline-dark">
+        <button onClick={this.reRoute} className="btn btn-outline-primary">
           View Courses Allocated to this Program
         </button>
       </div>

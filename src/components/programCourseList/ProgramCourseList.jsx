@@ -123,7 +123,7 @@ class ProgramCourseList extends Component {
           {
             title: "Update Course(/s)",
             icon: (
-              <button className="btn btn-outline-success">
+              <button className="btn btn-outline-primary">
                 Update Course(/s)
               </button>
             ),
@@ -132,7 +132,7 @@ class ProgramCourseList extends Component {
           {
             title: "Delete Course(/s)",
             icon: (
-              <button className="btn btn-outline-warning">
+              <button className="btn btn-outline-danger">
                 Delete Course(/s)
               </button>
             ),
