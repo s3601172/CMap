@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Datatable } from "@o2xp/react-datatable";
 
 import ProgramService from "../API/program/ProgramService.js";
-import "./ProgramDetails.css";
 
 class ProgramDetails extends Component {
   constructor(props) {
