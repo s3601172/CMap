@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Datatable } from "@o2xp/react-datatable";
 import { Link} from "react-router-dom";
-import PublishIcon from "@material-ui/icons/Publish";
+
 import "../../bootstrap.css";
 import "../../index.css";
-import ProgramCourseService from "../API/programCourse/ProgramCourseService.js";
+import ProgramService from "../API/programCourse/ProgramService.js";
 
 
 class ProgramCourseList extends Component {
@@ -26,7 +26,7 @@ class ProgramCourseList extends Component {
   }
 
   refreshList() {
-    ProgramCourseService.getProgramCourseList().then(response => {
+    ProgramService.getProgramCourseList().then(response => {
       let resData = response.data;
       this.setState({
         option: this.getOption(resData)
@@ -51,13 +51,11 @@ class ProgramCourseList extends Component {
       console.log(data[0].programCode);
       this.deleteRequest(data[0].programCode,data[0].courseCode,data[0].semester);
       this.refreshList()
-    }
-
-    
+    }    
   }
 
   deleteRequest(programCode,courseCode,semester){
-    ProgramCourseService.removeCourse(programCode,courseCode,semester);
+    ProgramService.removeCourse(programCode,courseCode,semester);
     
   }
 
@@ -81,7 +79,7 @@ class ProgramCourseList extends Component {
   }
 
   updateRequest(data){
-    ProgramCourseService.updateCourse(data)
+    ProgramService.updateCourse(data)
     .then(response => {
       console.log(response);
       console.log(response.data);
