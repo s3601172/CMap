@@ -21,21 +21,22 @@ class ProgramDetails extends Component {
     ProgramService.getProgramList().then(response => {
       let resData = response.data;
 
-      let expandData = [{
-        code: resData[0].programID.code,
-        year: resData[0].programID.year,
-        name: resData[0].name,
-        target: resData[0].target
-      }];
+      let expandData = [
+        {
+          code: resData[0].programID.code,
+          year: resData[0].programID.year,
+          name: resData[0].name,
+          target: resData[0].target
+        }
+      ];
 
       this.setState({
-
         option: this.getOption(expandData)
       });
     });
   }
 
-  reRoute(){
+  reRoute() {
     this.props.history.push("/program-course-list");
   }
 
@@ -46,15 +47,15 @@ class ProgramDetails extends Component {
         columns: [
           {
             id: "code",
-            label: "Program Code",
+            label: "Program Code"
           },
           {
             id: "name",
-            label: "Program Name",
+            label: "Program Name"
           },
           {
             id: "target",
-            label: "Program Target",
+            label: "Program Target"
           }
         ],
         rows: data
@@ -71,7 +72,9 @@ class ProgramDetails extends Component {
           <h1>Program Details</h1>
         </div>
         <Datatable options={this.state.option} />
-        <button onClick={this.reRoute} className="btn btn-outline-dark">View Courses Allocated to this Program</button>
+        <button onClick={this.reRoute} className="btn btn-outline-dark">
+          View Courses Allocated to this Program
+        </button>
       </div>
     );
   }

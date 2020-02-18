@@ -1,9 +1,9 @@
 import axios from "axios";
 
-class CourseService{
-     getCourseList(){
-        return axios.get("http://localhost:8080/allCourseNotInPtogram/BP094GEN8");        
-    }
+class CourseService {
+  getCourseList() {
+    return axios.get("http://localhost:8080/courses-not-in-program/BP094GEN8");
+  }
 
   addCourse(course) {
     console.log("create");

@@ -1,4 +1,4 @@
-package com.CmapProject.Cmap.programcourse;
+package com.cmap.rest.webservices.cmaprestfulwebservices.programcourse;
 
 import java.io.Serializable;
 
@@ -6,7 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class RmitProgramCoursePk implements Serializable{
+public class ProgramCourseId implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	@Column(name = "course_code")
 	private String courseCode;
 	
@@ -15,12 +17,12 @@ public class RmitProgramCoursePk implements Serializable{
 	private String programCode;
 	
 	
-	protected RmitProgramCoursePk(){
+	protected ProgramCourseId(){
 		
 	}
 
 
-	public RmitProgramCoursePk(String courseCode, int semester, String programCode) {
+	public ProgramCourseId(String courseCode, int semester, String programCode) {
 		super();
 		this.courseCode = courseCode;
 		this.semester = semester;
@@ -77,7 +79,7 @@ public class RmitProgramCoursePk implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RmitProgramCoursePk other = (RmitProgramCoursePk) obj;
+		ProgramCourseId other = (ProgramCourseId) obj;
 		if (courseCode == null) {
 			if (other.courseCode != null)
 				return false;

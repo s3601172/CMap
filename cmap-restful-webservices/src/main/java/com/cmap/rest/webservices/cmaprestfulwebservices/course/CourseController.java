@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-public class RmitCourseJpaResource {
+public class CourseController {
 	@Autowired
-	private RmitCourseJpaRepository rmitcourseJpaRespository;
+	private CourseRepository courseRepo;
 
 	@GetMapping("/{courseCode}")
-	public List<RmitCourses> getOneCourseTodo(@PathVariable String courseCode) {
-		return rmitcourseJpaRespository.findByCourseCode(courseCode);
+	public List<CourseEntity> getCourseTodo(@PathVariable String courseCode) {
+		return courseRepo.findByCourseCode(courseCode);
 	}
 	
-	@GetMapping("/allCourseNotInPtogram/{programCode}")
-	public List<RmitCourses> getAllCourse(@PathVariable String programCode){
-		return rmitcourseJpaRespository.findAllCourseNotInProgram(programCode);
+	@GetMapping("/courses-not-in-program/{programCode}")
+	public List<CourseEntity> getAllCourse(@PathVariable String programCode){
+		return courseRepo.findAllCourseNotInProgram(programCode);
 	}
 
 }

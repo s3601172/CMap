@@ -2,7 +2,7 @@ package com.cmap.rest.webservices.cmaprestfulwebservices.coursetopic;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;	
+import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cmap.rest.webservices.cmaprestfulwebservices.topic.TopicEntity;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
-public class CourseTopicResource {
+@CrossOrigin(origins = "http://localhost:3000")
+public class CourseTopicController {
 	@Autowired
-	private CourseTopicRepository courseTopicDB;
+	private CourseTopicRepo courseTopicDB;
 
 	@GetMapping("course-topic")
 	public boolean getCourseTopic(@RequestParam("data") String courseCode, String topicCode) {
@@ -38,7 +38,7 @@ public class CourseTopicResource {
 		CourseTopicId newCourseTopicId = new CourseTopicId();
 		newCourseTopicId.setCourseCode("C1111");
 		newCourseTopicId.setTopicCode(topicEntity.getId());
-		
+
 		CourseTopicEntity newCourseTopic = new CourseTopicEntity();
 		newCourseTopic.setCourseTopicId(newCourseTopicId);
 		newCourseTopic.setOutcomeLevel(topicEntity.getOutcomeLevel());
@@ -53,33 +53,33 @@ public class CourseTopicResource {
 			return "Duplicate Entry";
 		}
 	}
-	
+
 	@GetMapping("course-topic-level")
-	public List<CourseTopicEntity> getCourseTopicList(@RequestParam String courseCode, @RequestParam String topicCode){
+	public List<CourseTopicEntity> getCourseTopicList(@RequestParam String courseCode, @RequestParam String topicCode) {
 		List<CourseTopicEntity> courseTopicList = courseTopicDB.getCourseTopicLevel(courseCode, topicCode);
-		
+
 		return courseTopicList;
 	}
-	
+
 	@PutMapping("update-course-topic")
 	public @ResponseBody String updateCourseTopic(@RequestBody TopicEntity topicEntity) {
 		String topicCode = topicEntity.getId();
 		String preReqLevel = topicEntity.getPreReqLevel();
 		String outcomeLevel = topicEntity.getOutcomeLevel();
-		
+
 		CourseTopicEntity courseTopic = courseTopicDB.findByCourseCode("C1111", topicCode);
 		courseTopic.setPreReqLevel(preReqLevel);
 		courseTopic.setOutcomeLevel(outcomeLevel);
-		
+
 		courseTopicDB.save(courseTopic);
-		
+
 		return "Updated";
 	}
-	
+
 	@DeleteMapping("delete-course-topic")
-	public @ResponseBody String deleteCourseTopic(@RequestParam String topicCode){
+	public @ResponseBody String deleteCourseTopic(@RequestParam String topicCode) {
 		CourseTopicEntity courseTopic = courseTopicDB.findByCourseCode("C1111", topicCode);
 		courseTopicDB.delete(courseTopic);
-		return "Deleted"	 ;
+		return "Deleted";
 	}
 }
