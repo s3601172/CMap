@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { Datatable } from "@o2xp/react-datatable";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "../../bootstrap.css";
 import "../../index.css";
-import ProgramService from "../API/programCourse/ProgramService.js";
-
+import ProgramService from "../API/program/ProgramService.js";
 
 class ProgramCourseList extends Component {
   constructor(props) {
@@ -37,54 +36,57 @@ class ProgramCourseList extends Component {
   deleteCourse(rowData) {
     let selectedLength = rowData.length;
     let data = rowData;
-    
-    if (selectedLength > 1){
+
+    if (selectedLength > 1) {
       var i;
-      for(i = 0; i < selectedLength; i++){
-        this.deleteRequest(data[i].programCode,data[i].courseCode,data[i].semester);
+      for (i = 0; i < selectedLength; i++) {
+        this.deleteRequest(
+          data[i].programCode,
+          data[i].courseCode,
+          data[i].semester
+        );
       }
-      this.refreshList()
-    }else{
+      this.refreshList();
+    } else {
       console.log(data);
       console.log(data[0].courseCode);
       console.log(data[0].semester);
       console.log(data[0].programCode);
-      this.deleteRequest(data[0].programCode,data[0].courseCode,data[0].semester);
-      this.refreshList()
-    }    
+      this.deleteRequest(
+        data[0].programCode,
+        data[0].courseCode,
+        data[0].semester
+      );
+      this.refreshList();
+    }
   }
 
-  deleteRequest(programCode,courseCode,semester){
-    ProgramService.removeCourse(programCode,courseCode,semester);
-    
+  deleteRequest(programCode, courseCode, semester) {
+    ProgramService.removeCourse(programCode, courseCode, semester);
   }
 
   updateCourse(rowData) {
     let selectedLength = rowData.length;
     let data = rowData;
-    
-    if (selectedLength > 1){
+
+    if (selectedLength > 1) {
       var i;
-      for(i = 0; i < selectedLength; i++){
+      for (i = 0; i < selectedLength; i++) {
         this.updateRequest(data[i]);
       }
-      
-    }else{
+    } else {
       console.log(data);
       this.updateRequest(data[0]);
-     
     }
 
     this.props.history.push("/program-course-list");
   }
 
-  updateRequest(data){
-    ProgramService.updateCourse(data)
-    .then(response => {
+  updateRequest(data) {
+    ProgramService.updateCourse(data).then(response => {
       console.log(response);
       console.log(response.data);
-    }
-    );
+    });
   }
 
   getOption(data) {
@@ -106,8 +108,8 @@ class ProgramCourseList extends Component {
             id: "semester",
             label: "Semester",
             editable: true,
-            inputType:"select",
-            values:[0,1,2,3,4,5,6],
+            inputType: "select",
+            values: [0, 1, 2, 3, 4, 5, 6],
             colSize: "150px"
           }
         ],
@@ -120,23 +122,29 @@ class ProgramCourseList extends Component {
         selectionIcons: [
           {
             title: "Update Course(/s)",
-            icon: <button className="btn btn-outline-success">Update Course(/s)</button>,
+            icon: (
+              <button className="btn btn-outline-success">
+                Update Course(/s)
+              </button>
+            ),
             onClick: rows => this.updateCourse(rows)
-            
           },
           {
             title: "Delete Course(/s)",
-            icon: <button className="btn btn-outline-warning">Delete Course(/s)</button>,
+            icon: (
+              <button className="btn btn-outline-warning">
+                Delete Course(/s)
+              </button>
+            ),
             onClick: rows => this.deleteCourse(rows)
-            
           }
         ]
       },
-      dimensions:{
-        row:{
-          height:"120px"
+      dimensions: {
+        row: {
+          height: "120px"
         },
-        datatable:{
+        datatable: {
           height: "1200px"
         }
       }
@@ -151,11 +159,12 @@ class ProgramCourseList extends Component {
         <div className="container centre bm-4">
           <h1>Program Course List</h1>
         </div>
-        <Datatable options={this.state.option}/>
+        <Datatable options={this.state.option} />
         <div className="container centre bm-4">
-          <Link to="/course-list"><button  className="btn btn-outline-primary">Add Course</button></Link>
+          <Link to="/course-list">
+            <button className="btn btn-outline-primary">Add Course</button>
+          </Link>
         </div>
-        
       </div>
     );
   }

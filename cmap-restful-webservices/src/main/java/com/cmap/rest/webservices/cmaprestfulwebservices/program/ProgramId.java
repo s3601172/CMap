@@ -5,14 +5,16 @@ import java.io.Serializable;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class RmitProgramId implements Serializable{
+public class ProgramId implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	private String code;
 	private int year;
 	
-	protected RmitProgramId(){
+	protected ProgramId(){
 		
 	}
-	public RmitProgramId(String code, int year) {
+	public ProgramId(String code, int year) {
 		super();
 		this.code = code;
 		this.year = year;

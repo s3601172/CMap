@@ -7,11 +7,11 @@ import javax.persistence.IdClass;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
-import com.cmap.rest.webservices.cmaprestfulwebservices.programcourse.RmitProgramCoursePk;
+import com.cmap.rest.webservices.cmaprestfulwebservices.programcourse.ProgramCourseId;
 
 @Entity
 @Table(name = "rmit_program_course")
-@IdClass(RmitProgramCoursePk.class)
+@IdClass(ProgramCourseId.class)
 @SecondaryTable(name = "rmit_courses")
 public class RmitProgramCourseBo {
 	@Id
