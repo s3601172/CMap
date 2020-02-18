@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
 @Table(name="rmit_courses")
-public class RmitCourses {
+public class CourseEntity {
 	@Id
 	@Column(name = "course_code")
 	private String courseCode;
@@ -17,11 +17,11 @@ public class RmitCourses {
 	private int credits;
 	
 	
-	protected RmitCourses(){
+	protected CourseEntity(){
 		
 	}
 	
-	public RmitCourses(String courseCode, String title, int credits) {
+	public CourseEntity(String courseCode, String title, int credits) {
 		super();
 		this.courseCode = courseCode;
 		this.title = title;

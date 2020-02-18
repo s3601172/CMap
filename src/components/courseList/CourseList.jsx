@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Datatable } from "@o2xp/react-datatable";
 import CourseService from "../API/course/CourseService.js"
-import PublishIcon from "@material-ui/icons/Publish";
-import axios from "axios";
 
 import "../../bootstrap.css";
 import "../../index.css";
@@ -45,8 +43,6 @@ class CourseList extends Component {
       console.log(data);
       this.postRequest(data[0]);
     }
-
-    // this.props.history.push("/course-details");
   }
 
   postRequest(data){
@@ -87,7 +83,7 @@ class CourseList extends Component {
         selectionIcons: [
           {
             title: "Add Course(/s)",
-            icon: <PublishIcon color="primary" />,
+            icon: <button className="btn btn-outline-primary"></button>,
             onClick: rows => this.postCourse(rows)
             
           }

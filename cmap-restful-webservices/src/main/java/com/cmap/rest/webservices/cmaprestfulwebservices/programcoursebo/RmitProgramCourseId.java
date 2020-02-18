@@ -2,18 +2,18 @@ package com.cmap.rest.webservices.cmaprestfulwebservices.programcoursebo;
 
 import java.io.Serializable;
 
-public class RmitProgramCourseId implements Serializable{
-	private String courseCode;
-	
-	private int semester;
-	
-	private String programCode;
-	
-	
-	protected RmitProgramCourseId(){
-		
-	}
+public class RmitProgramCourseId implements Serializable {
+	private static final long serialVersionUID = 1L;
 
+	private String courseCode;
+
+	private int semester;
+
+	private String programCode;
+
+	protected RmitProgramCourseId() {
+
+	}
 
 	public RmitProgramCourseId(String courseCode, int semester, String programCode) {
 		super();
@@ -22,36 +22,29 @@ public class RmitProgramCourseId implements Serializable{
 		this.programCode = programCode;
 	}
 
-
 	public String getCourseCode() {
 		return courseCode;
 	}
-
 
 	public void setCourseCode(String courseCode) {
 		this.courseCode = courseCode;
 	}
 
-
 	public int getsemester() {
 		return semester;
 	}
-
 
 	public void setsemester(int semester) {
 		this.semester = semester;
 	}
 
-
 	public String getProgramCode() {
 		return programCode;
 	}
 
-
 	public void setProgramCode(String programCode) {
 		this.programCode = programCode;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -62,7 +55,6 @@ public class RmitProgramCourseId implements Serializable{
 		result = prime * result + semester;
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -87,7 +79,5 @@ public class RmitProgramCourseId implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
+
 }
