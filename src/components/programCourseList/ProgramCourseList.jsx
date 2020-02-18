@@ -4,7 +4,7 @@ import { Link} from "react-router-dom";
 
 import "../../bootstrap.css";
 import "../../index.css";
-import ProgramService from "../API/programCourse/ProgramService.js";
+import ProgramService from "../API/program/ProgramService.js";
 
 
 class ProgramCourseList extends Component {
