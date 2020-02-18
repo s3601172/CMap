@@ -1,7 +1,6 @@
 package com.cmap.rest.webservices.cmaprestfulwebservices.course;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +17,10 @@ public class RmitCourseJpaResource {
 	public List<RmitCourses> getOneCourseTodo(@PathVariable String courseCode) {
 		return rmitcourseJpaRespository.findByCourseCode(courseCode);
 	}
-
-	@GetMapping("/allCourse")
-	public List<RmitCourses> getAllCourse() {
-		return rmitcourseJpaRespository.findAll();
+	
+	@GetMapping("/allCourseNotInPtogram/{programCode}")
+	public List<RmitCourses> getAllCourse(@PathVariable String programCode){
+		return rmitcourseJpaRespository.findAllCourseNotInProgram(programCode);
 	}
 
 }

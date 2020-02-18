@@ -41,25 +41,24 @@ class ProgramCourseList extends Component {
     if (selectedLength > 1){
       var i;
       for(i = 0; i < selectedLength; i++){
-        this.deleteRequest(data[i]);
+        this.deleteRequest(data[i].programCode,data[i].courseCode,data[i].semester);
       }
       this.refreshList()
     }else{
       console.log(data);
-      this.deleteRequest(data[0]);
+      console.log(data[0].courseCode);
+      console.log(data[0].semester);
+      console.log(data[0].programCode);
+      this.deleteRequest(data[0].programCode,data[0].courseCode,data[0].semester);
       this.refreshList()
     }
 
     
   }
 
-  deleteRequest(data){
-    ProgramCourseService.deleteCourse(data)
-    .then(response => {
-      console.log(response);
-      console.log(response.data);
-    }
-    );
+  deleteRequest(programCode,courseCode,semester){
+    ProgramCourseService.removeCourse(programCode,courseCode,semester);
+    
   }
 
   updateCourse(rowData) {
@@ -109,6 +108,8 @@ class ProgramCourseList extends Component {
             id: "semester",
             label: "Semester",
             editable: true,
+            inputType:"select",
+            values:[0,1,2,3,4,5,6],
             colSize: "150px"
           }
         ],
