@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cmap.rest.webservices.cmaprestfulwebservices.topic.TopicEntity;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://cmap.s3-website-ap-southeast-2.amazonaws.com/")
 public class CourseTopicController {
 	@Autowired
 	private CourseTopicRepo courseTopicDB;

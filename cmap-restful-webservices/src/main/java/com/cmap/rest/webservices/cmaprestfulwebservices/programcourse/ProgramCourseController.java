@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cmap.rest.webservices.cmaprestfulwebservices.course.CourseEntity;
-import com.cmap.rest.webservices.cmaprestfulwebservices.programcoursebo.RmitProgramCourseBo;
+import com.cmap.rest.webservices.cmaprestfulwebservices.programcoursebo.ProgramCourseBo;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://cmap.s3-website-ap-southeast-2.amazonaws.com/")
 public class ProgramCourseController {
 	@Autowired
 	private ProgramCourseRepository rmitProgramJpaRespository;
@@ -35,7 +35,7 @@ public class ProgramCourseController {
 	}
 
 	@PutMapping("/update-program-course")
-	public void updateCourseSemester(@RequestBody RmitProgramCourseBo rmitProgramCourseBo) {
+	public void updateCourseSemester(@RequestBody ProgramCourseBo rmitProgramCourseBo) {
 		String courseCode = rmitProgramCourseBo.getCourseCode();
 		System.out.println(courseCode);
 		String programCode = rmitProgramCourseBo.getProgramCode();

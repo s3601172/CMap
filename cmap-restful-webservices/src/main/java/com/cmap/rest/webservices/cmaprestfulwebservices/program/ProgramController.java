@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://cmap.s3-website-ap-southeast-2.amazonaws.com/")
 public class ProgramController {
 	@Autowired
 	private ProgramRepository rmitProgramJpaRespository;

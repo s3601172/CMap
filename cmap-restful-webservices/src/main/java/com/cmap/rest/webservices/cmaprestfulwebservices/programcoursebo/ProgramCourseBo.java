@@ -13,7 +13,7 @@ import com.cmap.rest.webservices.cmaprestfulwebservices.programcourse.ProgramCou
 @Table(name = "rmit_program_course")
 @IdClass(ProgramCourseId.class)
 @SecondaryTable(name = "rmit_courses")
-public class RmitProgramCourseBo {
+public class ProgramCourseBo {
 	@Id
 	@Column(name = "course_code")
 	private String courseCode;
@@ -29,11 +29,11 @@ public class RmitProgramCourseBo {
 	@Column(name = "title", table = "rmit_courses")
 	private String title;
 
-	protected RmitProgramCourseBo() {
+	protected ProgramCourseBo() {
 
 	}
 
-	public RmitProgramCourseBo(String courseCode, int semester, String programCode, String title) {
+	public ProgramCourseBo(String courseCode, int semester, String programCode, String title) {
 		super();
 		this.courseCode = courseCode;
 		this.semester = semester;

@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
-public class RmitProgramCourseBoJpaResource {
+@CrossOrigin(origins = "http://cmap.s3-website-ap-southeast-2.amazonaws.com/")
+public class ProgramCourseBoController {
 
 	@Autowired
-	private RmitProgramCourseBoJpaRepository rmitProgramBoJpaRespository;
+	private ProgramCourseBoRepository rmitProgramBoJpaRespository;
 
 	@GetMapping("/allCourseinProgram/{programCode}")
-	public List<RmitProgramCourseBo> getAllCourseinProgram(@PathVariable String programCode) {
+	public List<ProgramCourseBo> getAllCourseinProgram(@PathVariable String programCode) {
 		return rmitProgramBoJpaRespository.findAllCourseByProgram(programCode);
 	}
 
