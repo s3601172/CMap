@@ -14,7 +14,7 @@ import com.cmap.rest.webservices.cmaprestfulwebservices.course.CourseEntity;
 import com.cmap.rest.webservices.cmaprestfulwebservices.programcoursebo.ProgramCourseBo;
 
 @RestController
-@CrossOrigin(origins = "http://cmap.s3-website-ap-southeast-2.amazonaws.com/")
+@CrossOrigin(origins = "http://cmap.s3-website-ap-southeast-2.amazonaws.com")
 public class ProgramCourseController {
 	@Autowired
 	private ProgramCourseRepository rmitProgramJpaRespository;
