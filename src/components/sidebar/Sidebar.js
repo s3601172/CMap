@@ -102,5 +102,4 @@ function Sidebar(name) {
     </Menu>
   )
 }
-
 export default Sidebar

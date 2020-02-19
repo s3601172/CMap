@@ -2,8 +2,6 @@ package com.cmap.rest.webservices.cmaprestfulwebservices.topic;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SecondaryTable;
 import javax.persistence.SecondaryTables;
@@ -18,26 +16,25 @@ import javax.persistence.Table;
 })
 public class TopicEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "topic_code", table="std_topic")
+	@Column(name = "topic_code")
 	public String id;
 	
 	@Column(name = "name", table="std_guidelines")
 	public String bokRef;
 	
-	@Column(name ="title", table="std_ka")
+	@Column(name ="ka_title", table="std_ka")
 	public String area;
 	
-	@Column(name = "title", table="std_ku")
+	@Column(name = "ku_title", table="std_ku")
 	public String unit;
 	
-	@Column(name = "title", table="std_topic")
+	@Column(name = "title")
 	public String topic;
 	
-	@Column(name = "level", table="std_topic")
+	@Column(name = "level")
 	public String outcomeLevel;
 	
-	@Column(name = "requirement", table="std_topic")
+	@Column(name = "requirement")
 	public String preReqLevel;
 	
 	public String getId() {
@@ -96,18 +93,28 @@ public class TopicEntity {
 		this.preReqLevel = preReqLevel;
 	}
 
-	public TopicEntity() {
-		
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 
-	public TopicEntity(String id, String unit, String topic, String outcomeLevel, String preReqLevel) {
-		this.id = id;
-		this.unit = unit;
-		this.topic = topic;
-		this.outcomeLevel = outcomeLevel;
-		this.preReqLevel = preReqLevel;
-	}
-
-
-	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TopicEntity other = (TopicEntity) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}	
 }
