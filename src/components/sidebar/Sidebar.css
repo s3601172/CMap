@@ -1,3 +1,7 @@
+.menu-items{
+  color: white;
+}
+
 .bm-item {
   display: inline-block;
   text-decoration: none;
@@ -32,7 +36,7 @@
 }
 
 .bm-menu {
-  background: #373a47;
+  background:#D3D3D3;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
@@ -45,11 +49,6 @@
   color: #b8b7ad;
 }
 
-.bm-overlay {
-  background: rgba(0, 0, 0, 0.3);
-}
-
 .sidebar {
   max-width: 240px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
 }
