@@ -83,7 +83,7 @@ class CourseList extends Component {
         selectionIcons: [
           {
             title: "Add Course(/s)",
-            icon: <button className="btn btn-outline-primary"></button>,
+            icon: <button className="btn btn-outline-primary">Add Course(/s)</button>,
             onClick: rows => this.postCourse(rows)
             
           }

@@ -9,9 +9,14 @@ class ProgramService {
     return axios.get("http://localhost:8080/allCourseinProgram/BP094GEN8");
   }
 
-  deleteCourse(course) {
-    console.log("delete");
-    return axios.delete("http://localhost:8080/delete-program-course", course);
+  removeCourse(programCode, courseCode, semester) {
+    return axios.delete("http://localhost:8080/delete-program-course", {
+      params: {
+        "programCode": programCode,
+        "courseCode": courseCode,
+        "semester": semester          
+      }
+    });
   }
 
   updateCourse(course) {

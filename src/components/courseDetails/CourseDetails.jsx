@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Datatable } from "@o2xp/react-datatable";
 import TopicService from "../API/topic/TopicService.js";
 import CourseService from "../API/course/CourseService.js";
-import Alert from "../alert/Alert";
+// import Alert from "../alert/Alert";
 
 import "../../bootstrap.css";
 import "../../index.css";
@@ -12,10 +12,7 @@ class CourseDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      option: {},
-      actionStatus: false,
-      actionTaken: "",
-      msg: ""
+      option: {}
     };
     this.refreshList = this.refreshList.bind(this);
     this.getOption = this.getOption.bind(this);
@@ -40,18 +37,10 @@ class CourseDetails extends Component {
     for(let topicDetails of rows){
       CourseService.getCourseTopicLevel("C1111", topicDetails.id).then(response => {
         if ((topicDetails.outcomeLevel === response.data[0].outcomeLevel) && (topicDetails.preReqLevel === response.data[0].preReqLevel)){
-          this.setState({
-            actionTaken: true,
-            actionStatus: "fail",
-            msg:"Data is the same. No changes have been made."
-          })
+          console.log("Data is the same. No Changes Made");
         } else{
           CourseService.updateCourseTopicLevel(topicDetails).then(response =>{
-            this.setState({
-              actionTaken: true,
-              actionStatus: "success",
-              msg:"Updated the table. Please refresh your browser to see changes."
-            })
+            console.log("Table updated.");
           });
         }
       });
@@ -64,6 +53,7 @@ class CourseDetails extends Component {
         console.log(response.data);
       })
     }
+    window.location.reload();
   }
 
   getOption(data) {
@@ -163,7 +153,6 @@ class CourseDetails extends Component {
   render() {
     return (
       <div>
-        <Alert actionTaken={this.state.actionTaken} actionStatus={this.state.actionStatus} msg={this.state.msg}></Alert>
         <div className="container centre bm-4">
           <h1>C1111 Dummy Course</h1>
         </div>
