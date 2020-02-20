@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cmap.rest.webservices.cmaprestfulwebservices.course.CourseEntity;
+import com.cmap.rest.webservices.cmaprestfulwebservices.coursetopic.CourseTopicEntity;
 import com.cmap.rest.webservices.cmaprestfulwebservices.programcoursebo.RmitProgramCourseBo;
 
 @RestController
@@ -19,9 +22,9 @@ public class ProgramCourseController {
 	@Autowired
 	private ProgramCourseRepository rmitProgramJpaRespository;
 
-	@DeleteMapping("/delete-program-course/{programCode}/{courseCode}/{semester}")
-	public ResponseEntity<Void> deleteTodo(@PathVariable String programCode, @PathVariable String courseCode,
-			@PathVariable int semester) {
+	@DeleteMapping("/delete-program-course")
+	public ResponseEntity<Void> deleteTodo(@RequestParam String programCode, @RequestParam String courseCode,
+			@RequestParam int semester) {
 		ProgramCourseId programCourseId = new ProgramCourseId();
 		
 		programCourseId.setProgramCode(programCode);
@@ -31,7 +34,6 @@ public class ProgramCourseController {
 		rmitProgramJpaRespository.deleteById(programCourseId);
 		System.out.print("delete");
 		return ResponseEntity.noContent().build();
-
 	}
 
 	@PutMapping("/update-program-course")
@@ -47,14 +49,14 @@ public class ProgramCourseController {
 
 	@PostMapping(path = "/add-program-course", consumes = "application/json", produces = "application/json")
 	public void addProgramCourse(@RequestBody CourseEntity rmitCourse) {
-		ProgramCourseId programcourseId = new ProgramCourseId();
+		ProgramCourseId programCourseId = new ProgramCourseId();
 		ProgramCourseEntity rpc = new ProgramCourseEntity();
 		
-		programcourseId.setCourseCode(rmitCourse.getcourseCode());
-		programcourseId.setProgramCode("BP094GEN8");
-		programcourseId.setsemester(0);
+		programCourseId.setCourseCode(rmitCourse.getcourseCode());
+		programCourseId.setProgramCode("BP094GEN8");
+		programCourseId.setsemester(0);
 		
-		rpc.setProgramCourseID(programcourseId);
+		rpc.setProgramCourseID(programCourseId);
 		rmitProgramJpaRespository.save(rpc);
 
 	}
