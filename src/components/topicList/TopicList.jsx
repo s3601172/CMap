@@ -46,11 +46,12 @@ class TopicList extends Component {
     }
 
     this.props.history.push("/course-details");
+    window.location.reload();
   }
 
   postRequest(data){
     axios
-    .post("http://localhost:8080/add-course-topic", data)
+    .post("http://cmapbackend-env.dz3ak2mbhv.ap-southeast-2.elasticbeanstalk.com/add-course-topic", data)
     .then(response => {
       console.log(response);
       console.log(response.data);
