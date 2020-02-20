@@ -47,14 +47,14 @@ public class ProgramCourseController {
 
 	@PostMapping(path = "/add-program-course", consumes = "application/json", produces = "application/json")
 	public void addProgramCourse(@RequestBody CourseEntity rmitCourse) {
-		ProgramCourseId programcourseId = new ProgramCourseId();
+		ProgramCourseId programCourseId = new ProgramCourseId();
 		ProgramCourseEntity rpc = new ProgramCourseEntity();
 		
-		programcourseId.setCourseCode(rmitCourse.getcourseCode());
-		programcourseId.setProgramCode("BP094GEN8");
-		programcourseId.setsemester(0);
+		programCourseId.setCourseCode(rmitCourse.getcourseCode());
+		programCourseId.setProgramCode("BP094GEN8");
+		programCourseId.setsemester(0);
 		
-		rpc.setProgramCourseID(programcourseId);
+		rpc.setProgramCourseID(programCourseId);
 		rmitProgramJpaRespository.save(rpc);
 
 	}
