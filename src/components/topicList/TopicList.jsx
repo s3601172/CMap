@@ -1,106 +1,132 @@
 import React, { Component } from "react";
 
+import { Datatable } from "@o2xp/react-datatable";
+import TopicService from "../API/topic/TopicService.js"
+import axios from "axios";
+
+import "../../bootstrap.css";
 import "../../index.css";
 
-import Sidebar from "../sidebar/Sidebar";
-import SearchableTable from "../searchableTable/SearchableTable";
-
-const columns = [
-  { Header: "Topic ID", accessor: "id" },
-  { Header: "Body of Knowledge Reference", accessor: "bokRef" },
-  { Header: "Category", accessor: "category" },
-  { Header: "Topic", accessor: "topic" }
-];
-
-//replace this with db data
-let topicList = [
-  {
-    id: "CMP.cf.1",
-    bokRef: "ACM-IEEE-SE2014",
-    category: "Computing Essentials",
-    topic: "Programming Fundamentals (Control and Data Typing)"
-  },
-  {
-    id: "CMP.cf.2",
-    bokRef: "ACM-IEEE-SE2014",
-    category: "Computing Essentials",
-    topic: "Algorithims, Data Structures and Complexity"
-  },
-  {
-    id: "CMP.cf.3",
-    bokRef: "ACM-IEEE-SE2014",
-    category: "Computing Essentials",
-    topic: "Problem Solving Techniques"
-  },
-  {
-    id: "CMP.ct.1",
-    bokRef: "ACM-IEEE-SE2014",
-    category: "Construction Technologies",
-    topic: "API Design and Use"
-  },
-  {
-    id: "CMP.ct.2",
-    bokRef: "ACM-IEEE-SE2014",
-    category: "Construction Technologies",
-    topic: "Code Reuse and Libraries"
-  },
-  {
-    id: "CMP.ct.3",
-    bokRef: "ACM-IEEE-SE2014",
-    category: "Construction Technologies",
-    topic: "Object-Oriented Runtime Issues (e.g., polymorphism and dynamic...)"
-  },
-  {
-    id: "FND.mf.1",
-    bokRef: "ACM-IEEE-SE2014",
-    category: "Mathematical and Engineering Fundamentals",
-    topic: "Functions, Relations and Sets"
-  },
-  {
-    id: "FND.mf.2",
-    bokRef: "ACM-IEEE-SE2014",
-    category: "Mathematical and Engineering Fundamentals",
-    topic: "Basic Logic (Propositional and Predicate)"
-  },
-  {
-    id: "FND.mf.3",
-    bokRef: "ACM-IEEE-SE2014",
-    category: "Mathematical and Engineering Fundamentals",
-    topic: "Proof Techniques (Direct, Contradiction, and Inductive)"
-  },
-  {
-    id: "PRF.psy.1",
-    bokRef: "ACM-IEEE-SE2014",
-    category: "Professional Practice",
-    topic: "Dynamics of Working in Teams and Groups"
-  },
-  {
-    id: "PRF.psy.2",
-    bokRef: "ACM-IEEE-SE2014",
-    category: "Professional Practice",
-    topic: "Individual Cognition (e.g., limits)"
-  },
-  {
-    id: "PRF.psy.3",
-    bokRef: "ACM-IEEE-SE2014",
-    category: "Professional Practice",
-    topic: "Cognitive Problem Complexity"
-  }
-];
-
 class TopicList extends Component {
-  render(){
-    return(
-      <div className = "centre">
-        <Sidebar />
-        <h1>Topic List</h1>
-        <SearchableTable columns = {columns} data={topicList}/>
-        <button type="submit">Add Topic</button>
+  constructor(props) {
+    super(props);
+    this.state = {
+      option: {}
+    };
+    this.refreshList = this.refreshList.bind(this);
+    this.getOption = this.getOption.bind(this);
+    this.postTopic = this.postTopic.bind(this);
+    this.postRequest = this.postRequest.bind(this);
+  }
+
+  componentDidMount() {
+    this.refreshList();
+  }
+
+  refreshList() {
+    TopicService.getTopicList().then(response => {
+      let resData = response.data;
+      this.setState({
+        option: this.getOption(resData)
+      });
+    });
+  }
+
+  postTopic(rowData) {
+    let selectedLength = rowData.length;
+    let data = rowData;
+
+    if (selectedLength > 1){
+      var i;
+      for(i = 0; i < selectedLength; i++){
+        this.postRequest(data[i]);
+      }
+    }else{
+      this.postRequest(data[0]);
+    }
+
+    this.props.history.push("/course-details");
+    window.location.reload();
+  }
+
+  postRequest(data){
+    axios
+    .post("http://cmapbackend-env.dz3ak2mbhv.ap-southeast-2.elasticbeanstalk.com/add-course-topic", data)
+    .then(response => {
+      console.log(response);
+      console.log(response.data);
+    }
+    );
+  }
+
+  getOption(data) {
+    let options = {
+      keyColumn: "id",
+      data: {
+        columns: [
+          {
+            id: "bokRef",
+            label: "Book of Knowledge Reference",
+            colSize: "100px"
+          },
+          {
+            id: "area",
+            label: "Knowledge Area",
+            colSize: "150px"
+          },
+          {
+            id: "unit",
+            label: "Knowledge Unit",
+            colSize: "150px"
+          },
+          {
+            id: "id",
+            label: "Topic ID",
+            colSize: "50px"
+          },
+          {
+            id: "topic",
+            label: "Topic Name",
+            colSize: "400px"
+          }
+        ],
+        rows: data
+      },
+      features: {
+        canSelectRow: true,
+        canSearch: true,
+        selectionIcons: [
+          {
+            title: "Add Topic(/s)",
+            icon: <button className="btn btn-outline-primary">Add Topic(/s)</button>,
+            onClick: rows => this.postTopic(rows)
+          }
+        ]
+      },
+      dimensions:{
+        row:{
+          height:"120px"
+        },
+        datatable:{
+          height: "1200px",
+          width: "1200px"
+        }
+      }
+    };
+
+    return options;
+  }
+
+ render() {
+    return (
+      <div className="container">
+        <div className="container centre bm-4">
+          <h1>Topic List</h1>
+        </div>
+        <Datatable options={this.state.option}/>
       </div>
-    )
+    );
   }
 }
-
-
 
 export default TopicList;

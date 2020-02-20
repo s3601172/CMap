@@ -48,3 +48,8 @@
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
 }
+
+.sidebar {
+  max-width: 240px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
