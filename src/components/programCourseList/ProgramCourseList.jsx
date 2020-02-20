@@ -63,6 +63,7 @@ class ProgramCourseList extends Component {
 
   deleteRequest(programCode, courseCode, semester) {
     ProgramService.removeCourse(programCode, courseCode, semester);
+    window.location.reload();
   }
 
   updateCourse(rowData) {
@@ -80,6 +81,7 @@ class ProgramCourseList extends Component {
     }
 
     this.props.history.push("/program-course-list");
+    window.location.reload();
   }
 
   updateRequest(data) {
@@ -87,6 +89,7 @@ class ProgramCourseList extends Component {
       console.log(response);
       console.log(response.data);
     });
+    window.location.reload();
   }
 
   getOption(data) {

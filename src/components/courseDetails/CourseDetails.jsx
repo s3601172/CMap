@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Datatable } from "@o2xp/react-datatable";
 import TopicService from "../API/topic/TopicService.js";
 import CourseService from "../API/course/CourseService.js";
+// import Alert from "../alert/Alert";
 
 import "../../bootstrap.css";
 import "../../index.css";
@@ -36,10 +37,10 @@ class CourseDetails extends Component {
     for(let topicDetails of rows){
       CourseService.getCourseTopicLevel("C1111", topicDetails.id).then(response => {
         if ((topicDetails.outcomeLevel === response.data[0].outcomeLevel) && (topicDetails.preReqLevel === response.data[0].preReqLevel)){
-          console.log("No Changes: Data is the same");
+          console.log("Data is the same. No Changes Made");
         } else{
           CourseService.updateCourseTopicLevel(topicDetails).then(response =>{
-            console.log("Updated");
+            console.log("Table updated.");
           });
         }
       });
@@ -52,6 +53,7 @@ class CourseDetails extends Component {
         console.log(response.data);
       })
     }
+    window.location.reload();
   }
 
   getOption(data) {
