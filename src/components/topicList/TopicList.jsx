@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+
 import { Datatable } from "@o2xp/react-datatable";
-import CourseService from "../API/course/CourseService.js"
+import TopicService from "../API/topic/TopicService.js"
+import axios from "axios";
 
 import "../../bootstrap.css";
 import "../../index.css";
 
-class CourseList extends Component {
+class TopicList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +15,7 @@ class CourseList extends Component {
     };
     this.refreshList = this.refreshList.bind(this);
     this.getOption = this.getOption.bind(this);
-    this.postCourse = this.postCourse.bind(this);
+    this.postTopic = this.postTopic.bind(this);
     this.postRequest = this.postRequest.bind(this);
   }
 
@@ -22,7 +24,7 @@ class CourseList extends Component {
   }
 
   refreshList() {
-    CourseService.getCourseList().then(response => {
+    TopicService.getTopicList().then(response => {
       let resData = response.data;
       this.setState({
         option: this.getOption(resData)
@@ -30,51 +32,62 @@ class CourseList extends Component {
     });
   }
 
-  postCourse(rowData) {
+  postTopic(rowData) {
     let selectedLength = rowData.length;
     let data = rowData;
-    
+
     if (selectedLength > 1){
       var i;
       for(i = 0; i < selectedLength; i++){
         this.postRequest(data[i]);
       }
     }else{
-      console.log(data);
       this.postRequest(data[0]);
     }
+
+    this.props.history.push("/course-details");
+    window.location.reload();
   }
 
   postRequest(data){
-    CourseService.addCourse(data)
+    axios
+    .post("http://cmapbackend-env.dz3ak2mbhv.ap-southeast-2.elasticbeanstalk.com/add-course-topic", data)
     .then(response => {
       console.log(response);
       console.log(response.data);
     }
     );
-    this.props.history.push("/program-course-list");
-    window.location.reload();
   }
 
   getOption(data) {
     let options = {
-      keyColumn: "courseCode",
+      keyColumn: "id",
       data: {
         columns: [
           {
-            id: "courseCode",
-            label: "Course Code",
+            id: "bokRef",
+            label: "Book of Knowledge Reference",
+            colSize: "100px"
+          },
+          {
+            id: "area",
+            label: "Knowledge Area",
+            colSize: "150px"
+          },
+          {
+            id: "unit",
+            label: "Knowledge Unit",
+            colSize: "150px"
+          },
+          {
+            id: "id",
+            label: "Topic ID",
             colSize: "50px"
           },
           {
-            id: "title",
-            label: "Course Name",
-            colSize: "150px"
-          },
-          {
-            id: "credits",
-            label: "Credits",
-            colSize: "150px"
+            id: "topic",
+            label: "Topic Name",
+            colSize: "400px"
           }
         ],
         rows: data
@@ -84,10 +97,9 @@ class CourseList extends Component {
         canSearch: true,
         selectionIcons: [
           {
-            title: "Add Course(/s)",
-            icon: <button className="btn btn-outline-primary">Add Course(/s)</button>,
-            onClick: rows => this.postCourse(rows)
-            
+            title: "Add Topic(/s)",
+            icon: <button className="btn btn-outline-primary">Add Topic(/s)</button>,
+            onClick: rows => this.postTopic(rows)
           }
         ]
       },
@@ -96,7 +108,8 @@ class CourseList extends Component {
           height:"120px"
         },
         datatable:{
-          height: "1200px"
+          height: "1200px",
+          width: "1200px"
         }
       }
     };
@@ -104,11 +117,11 @@ class CourseList extends Component {
     return options;
   }
 
-  render() {
+ render() {
     return (
       <div className="container">
         <div className="container centre bm-4">
-          <h1>Course List</h1>
+          <h1>Topic List</h1>
         </div>
         <Datatable options={this.state.option}/>
       </div>
@@ -116,4 +129,4 @@ class CourseList extends Component {
   }
 }
 
-export default CourseList;
+export default TopicList;

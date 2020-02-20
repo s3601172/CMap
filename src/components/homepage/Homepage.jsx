@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import "./HomepageStyle.css";
-import Sidebar from "../sidebar/Sidebar";
+import Card from "../dashboard/card";
+
+import "../../bootstrap.css";
+import "../../index.css";
 
 class Homepage extends Component {
   render(userType) {
@@ -8,67 +10,44 @@ class Homepage extends Component {
 
     if (userType === "PM") {
       return (
-        <div className = "center">
-          <Sidebar />
-          <h1>Your Programs</h1>
-
-          <table>
-            <tr>
-              <th>P1 Bachelor of Information Technology</th>
-            </tr>
-
-            <tr>
-              <td>
-                Undergraduate Information Technology Program
-              </td>
-            </tr>
-          </table>
+        <div className="center">
+          <Card 
+            cardHeader="Assigned Programs"
+            cardTitle="Bachelor of Computer Science(BP094GEN8)"
+            cardDesc="Undergraduate Computer Science Program"
+            cardBtn="Program Details"
+          />
         </div>
       );
     } else if (userType === "CC") {
       return (
-        <div className = "center">
-          <Sidebar />
-          <h1>Your Courses</h1>
-
-          <table>
-            <tr>
-              <th>C1 Programming 1</th>
-            </tr>
-
-            <tr>
-              <td>Introductory Java Course</td>
-            </tr>
-          </table>
+        <div className="center">
+          <Card 
+            cardHeader="Assigned Courses"
+            cardTitle="Dummy Course (C1111)"
+            cardDesc="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+            cardBtn="Course Details"
+          />
         </div>
       );
     } else if (userType === "PMCC") {
       return (
-        <div className = "center">
-          <Sidebar />
-          <h1>Your Programs</h1>
+        <div className="center">
+          <Card 
+            cardHeader="Assigned Programs"
+            cardTitle="Bachelor of Computer Science(BP094GEN8)"
+            cardDesc="Undergraduate Computer Science Program"
+            url ="/program-details"
+            cardBtn="Program Details"
+          />
 
-          <table>
-            <tr>
-              <th>P1 Bachelor of Information Technology</th>
-            </tr>
-
-            <tr>
-              <td>Undergraduate Information Technology Program</td>
-            </tr>
-          </table>
-
-          <h1>Your Courses</h1>
-
-          <table>
-            <tr>
-              <th>C1 Programming 1</th>
-            </tr>
-
-            <tr>
-              <td>Introductory Java Course</td>
-            </tr>
-          </table>
+          <Card 
+            cardHeader="Assigned Courses"
+            cardTitle="Dummy Course (C1111)"
+            cardDesc="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+            url="/course-details"
+            cardBtn="Course Details"
+          />
         </div>
       );
     }

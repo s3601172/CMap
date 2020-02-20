@@ -1,74 +1,83 @@
-import React ,{Component} from 'react';
-import {BrowserRouter as Router, Route,Switch,Link} from 'react-router-dom'
-import "./ProgramDetails.css"
+import React, { Component } from "react";
+import { Datatable } from "@o2xp/react-datatable";
 
-class Pd extends Component{
-    render() {
-        return(
-            <div className="Pd">
-                <Router>
-                   <Switch>
-                        <Route path="/programCourseDetail" component={ProgramCourse}/>
-                        <Route path="/programDetail" component={ProgramDetail}/>
-                    </Switch>
-                </Router>
-            </div>
-        )
-    }
-}
+import ProgramService from "../API/program/ProgramService.js";
 
-class ProgramDetail extends Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            todos :
-            [
-                {ProgramID:'P1',ProgramName:'Bachelor of IT' ,StandardDutation:8, DegreeType:'Undergraduate'}
-            ]
+class ProgramDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      option: {}
+    };
+    this.refreshList = this.refreshList.bind(this);
+    this.reRoute = this.reRoute.bind(this);
+  }
+
+  componentDidMount() {
+    this.refreshList();
+  }
+
+  refreshList() {
+    ProgramService.getProgramList().then(response => {
+      let resData = response.data;
+
+      let expandData = [
+        {
+          code: resData[0].programID.code,
+          year: resData[0].programID.year,
+          name: resData[0].name,
+          target: resData[0].target
         }
-    }
-    render() {
-        return (
-            <div className ="center">
-                <h1>Program Detail</h1>
-                <div className="container">
-                    <table className="table table-bordered">
-                        <thead className="thead-dark">
-                            <tr>
-                                <th>ProgramID</th>
-                                <th>ProgramName</th>
-                                <th>StandardDuration</th>
-                                <th>DegreeType</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                this.state.todos.map(
-                                    todo =>
-                                        <tr>
-                                            <td>{todo.ProgramID}</td>
-                                            <td>{todo.ProgramName}</td>
-                                            <td>{todo.StandardDuration}</td>
-                                            <td>{todo.DegreeType}</td>
-                                        </tr>
-                                )
-                            }
+      ];
 
-                        </tbody>
-                    </table>
-                    <Link to="/programCourseDetail"><button className="btn btn-outline-primary" >View Courses Alllocated to this Program </button> </Link>
-                </div>
-            </div>
-        )
-    }
+      this.setState({
+        option: this.getOption(expandData)
+      });
+    });
+  }
+
+  reRoute() {
+    this.props.history.push("/program-course-list");
+  }
+
+  getOption(data) {
+    let options = {
+      keyColumn: "code",
+      data: {
+        columns: [
+          {
+            id: "code",
+            label: "Program Code"
+          },
+          {
+            id: "name",
+            label: "Program Name"
+          },
+          {
+            id: "target",
+            label: "Program Target"
+          }
+        ],
+        rows: data
+      }
+    };
+
+    return options;
+  }
+
+  render() {
+    return (
+      <div className="container centre">
+        <div className="container centre bm-4">
+          <h1>Program Details</h1>
+        </div>
+        <Datatable options={this.state.option} />
+        <button onClick={this.reRoute} className="btn btn-outline-primary">
+          View Courses Allocated to this Program
+        </button>
+      </div>
+    );
+  }
 }
 
-class ProgramCourse extends Component{
-    render() {
-        return (
-            <div>ProgramCourse</div>
-        )
-    }
-}
-
-export default Pd;
+export default ProgramDetails;
