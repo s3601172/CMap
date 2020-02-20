@@ -20,7 +20,7 @@ import com.cmap.rest.webservices.cmaprestfulwebservices.topic.TopicEntity;
 @CrossOrigin(origins ="http://cmap.s3-website-ap-southeast-2.amazonaws.com")
 public class CourseTopicController {
 	@Autowired
-	private CourseTopicRepo courseTopicDB;
+	private CourseTopicRepository courseTopicDB;
 
 	@GetMapping("course-topic")
 	public boolean getCourseTopic(@RequestParam("data") String courseCode, String topicCode) {
