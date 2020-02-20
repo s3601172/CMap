@@ -52,6 +52,8 @@ class CourseList extends Component {
       console.log(response.data);
     }
     );
+    this.props.history.push("/program-course-list");
+    window.location.reload();
   }
 
   getOption(data) {
