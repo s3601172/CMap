@@ -153,7 +153,7 @@ class CourseDetails extends Component {
     return (
       <div>
         <div className="container centre bm-4">
-          <h1>C1111 Dummy Course</h1>
+          <h1>C1111 Programming 1</h1>
         </div>
         <Datatable options={this.state.option} />
         <div className="container centre mt-4">
