@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { Datatable } from "@o2xp/react-datatable";
 import TopicService from "../API/topic/TopicService.js";
 import CourseService from "../API/course/CourseService.js";
-// import Alert from "../alert/Alert";
 
 import "../../bootstrap.css";
 import "../../index.css";
