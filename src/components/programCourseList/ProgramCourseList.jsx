@@ -16,8 +16,8 @@ class ProgramCourseList extends Component {
     this.getOption = this.getOption.bind(this);
     this.deleteCourse = this.deleteCourse.bind(this);
     this.deleteRequest = this.deleteRequest.bind(this);
-    this.updateCourse = this.updateCourse.bind(this);
     this.updateRequest = this.updateRequest.bind(this);
+    this.actionRow = this.actionRow.bind(this);
   }
 
   componentDidMount() {
@@ -32,6 +32,26 @@ class ProgramCourseList extends Component {
       });
     });
   }
+
+  actionRow({ type, payload }) {
+    if(type === "save"){
+      let selectedLength = payload.rows.length;
+      let data = payload.rows;
+  
+      if (selectedLength > 1) {
+        var i;
+        for (i = 0; i < selectedLength; i++) {
+          this.updateRequest(data[i]);
+        }
+      } else {
+        console.log(data);
+        this.updateRequest(data[0]);
+      }
+  
+      this.props.history.push("/program-course-list");
+      window.location.reload();
+    }
+  };
 
   deleteCourse(rowData) {
     let selectedLength = rowData.length;
@@ -63,24 +83,6 @@ class ProgramCourseList extends Component {
 
   deleteRequest(programCode, courseCode, semester) {
     ProgramService.removeCourse(programCode, courseCode, semester);
-    window.location.reload();
-  }
-
-  updateCourse(rowData) {
-    let selectedLength = rowData.length;
-    let data = rowData;
-
-    if (selectedLength > 1) {
-      var i;
-      for (i = 0; i < selectedLength; i++) {
-        this.updateRequest(data[i]);
-      }
-    } else {
-      console.log(data);
-      this.updateRequest(data[0]);
-    }
-
-    this.props.history.push("/program-course-list");
     window.location.reload();
   }
 
@@ -119,19 +121,16 @@ class ProgramCourseList extends Component {
         rows: data
       },
       features: {
-        canEdit: true,
+        canGlobalEdit: true,
         canSelectRow: true,
         canSearch: true,
+        additionalIcons:[{
+          title: "Add Course",
+          icon:(<Link to="/course-list">
+            <button className="btn btn-outline-primary">Add Course</button>
+          </Link>)
+        }],
         selectionIcons: [
-          {
-            title: "Update Course(/s)",
-            icon: (
-              <button className="btn btn-outline-primary">
-                Update Course(/s)
-              </button>
-            ),
-            onClick: rows => this.updateCourse(rows)
-          },
           {
             title: "Delete Course(/s)",
             icon: (
@@ -162,11 +161,8 @@ class ProgramCourseList extends Component {
         <div className="container centre bm-4">
           <h1>Program Course List</h1>
         </div>
-        <Datatable options={this.state.option} />
+        <Datatable options={this.state.option} actions={this.actionRow}/>
         <div className="container centre bm-4">
-          <Link to="/course-list">
-            <button className="btn btn-outline-primary">Add Course</button>
-          </Link>
         </div>
       </div>
     );
