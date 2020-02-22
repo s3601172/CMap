@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { Datatable } from "@o2xp/react-datatable";
 import TopicService from "../API/topic/TopicService.js";
 import CourseService from "../API/course/CourseService.js";
-// import Alert from "../alert/Alert";
 
 import "../../bootstrap.css";
 import "../../index.css";
@@ -16,8 +15,8 @@ class CourseDetails extends Component {
     };
     this.refreshList = this.refreshList.bind(this);
     this.getOption = this.getOption.bind(this);
-    this.saveChanges = this.saveChanges.bind(this);
     this.removeTopic = this.removeTopic.bind(this);
+    this.actionsRow = this.actionsRow.bind(this);
   }
 
   componentDidMount() {
@@ -33,25 +32,34 @@ class CourseDetails extends Component {
     });
   }
 
-  saveChanges(rows){
-    for(let topicDetails of rows){
-      CourseService.getCourseTopicLevel("C1111", topicDetails.id).then(response => {
-        if ((topicDetails.outcomeLevel === response.data[0].outcomeLevel) && (topicDetails.preReqLevel === response.data[0].preReqLevel)){
-          console.log("Data is the same. No Changes Made");
-        } else{
-          CourseService.updateCourseTopicLevel(topicDetails).then(response =>{
-            console.log("Table updated.");
-          });
-        }
-      });
+  actionsRow({ type, payload }) {
+    if(type === "save"){
+      for (let topicDetails of payload.rows) {
+        CourseService.getCourseTopicLevel("C1111", topicDetails.id).then(
+          response => {
+            if (
+              topicDetails.outcomeLevel === response.data[0].outcomeLevel &&
+              topicDetails.preReqLevel === response.data[0].preReqLevel
+            ) {
+              console.log("Data is the same. No Changes Made");
+            } else {
+              CourseService.updateCourseTopicLevel(topicDetails).then(
+                response => {
+                  console.log("Table updated.");
+                }
+              );
+            }
+          }
+        );
+      }
     }
-  }
+  };
 
-  removeTopic(rows){
-    for(let topicDetails of rows){
-      CourseService.removeCourseTopic(topicDetails.id).then(response =>{
+  removeTopic(rows) {
+    for (let topicDetails of rows) {
+      CourseService.removeCourseTopic(topicDetails.id).then(response => {
         console.log(response.data);
-      })
+      });
     }
     window.location.reload();
   }
@@ -105,7 +113,7 @@ class CourseDetails extends Component {
           {
             id: "outcomeLevel",
             label: "Outcome Level",
-            colSize:"10px",
+            colSize: "10px",
             editable: true,
             inputType: "select",
             values: [
@@ -120,8 +128,8 @@ class CourseDetails extends Component {
         ],
         rows: data
       },
-      dimensions:{
-        datatable:{
+      dimensions: {
+        datatable: {
           width: "100%",
           height: "950px"
         }
@@ -129,13 +137,18 @@ class CourseDetails extends Component {
       features: {
         canSelectRow: true,
         canSearch: true,
-        canEdit: true,
-        selectionIcons: [
+        canGlobalEdit: true,
+        additionalIcons: [
           {
-            title: "Save Changes",
-            icon:(<button className="btn btn-outline-primary">Save Changes</button>),
-            onClick: rows => this.saveChanges(rows)
-          },
+            title: "Add New Topic",
+            icon: (
+              <a href="/topic-list" className="btn btn-outline-primary">
+                Add New Topic
+              </a>
+            )
+          }
+        ],
+        selectionIcons: [
           {
             title: "Remove Topics",
             icon: (
@@ -156,10 +169,7 @@ class CourseDetails extends Component {
         <div className="container centre bm-4">
           <h1>C1111 Dummy Course</h1>
         </div>
-        <Datatable options={this.state.option} />
-        <div className="container centre mt-4">
-          <a href="/topic-list" className="btn btn-outline-primary">Add New Topic</a>
-        </div>
+        <Datatable options={this.state.option} actions={this.actionsRow} />
       </div>
     );
   }
