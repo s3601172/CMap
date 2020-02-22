@@ -36,6 +36,18 @@ public class TopicEntity {
 	
 	@Column(name = "requirement")
 	public String preReqLevel;
+
+	public TopicEntity(String id, String bokRef, String area, String unit, String topic, String outcomeLevel,
+			String preReqLevel) {
+		super();
+		this.id = id;
+		this.bokRef = bokRef;
+		this.area = area;
+		this.unit = unit;
+		this.topic = topic;
+		this.outcomeLevel = outcomeLevel;
+		this.preReqLevel = preReqLevel;
+	}
 	
 	public String getId() {
 		return id;
