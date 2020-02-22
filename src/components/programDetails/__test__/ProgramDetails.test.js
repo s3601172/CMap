@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import TopicList from "../TopicList.jsx";
+import ProgramDetails from "../ProgramDetails.jsx";
 
 test("Renders Without Crashing", ()=>{
     const div = document.createElement("div");
-    ReactDOM.render(<TopicList/>, div);
+    ReactDOM.render(<ProgramDetails/>, div);
     ReactDOM.unmountComponentAtNode(div);
 })
