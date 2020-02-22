@@ -1,14 +1,19 @@
 import React, { Component } from "react";
-import Card from "../dashboard/card";
+import Card from "../dashboard/Card";
 
 import "../../bootstrap.css";
 import "../../index.css";
 
 class Homepage extends Component {
-  render(userType) {
-    userType = "PMCC";
+  constructor(props){
+    super(props);
+    this.state = {
+      userType: "PMCC"
+    };
+  }
 
-    if (userType === "PM") {
+  render() {
+    if (this.state.userType === "PM") {
       return (
         <div className="center">
           <Card 
@@ -19,7 +24,7 @@ class Homepage extends Component {
           />
         </div>
       );
-    } else if (userType === "CC") {
+    } else if (this.state.userType === "CC") {
       return (
         <div className="center">
           <Card 
@@ -30,7 +35,7 @@ class Homepage extends Component {
           />
         </div>
       );
-    } else if (userType === "PMCC") {
+    } else if (this.state.userType === "PMCC") {
       return (
         <div className="center">
           <Card 
