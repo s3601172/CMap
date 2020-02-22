@@ -125,8 +125,8 @@ class ProgramCourseList extends Component {
           {
             title: "Add Course",
             icon: (
-              <a href="/courselist" className="btn btn-outline-primary">
-                AddCourse
+              <a href="/course-list" className="btn btn-outline-primary">
+                Add Course
               </a>
             )
           }
