@@ -20,7 +20,7 @@ class CourseService {
   }
 
   updateCourseTopicLevel(topicDetails) {
-    return axios.put("http://cmapbackend-env.dz3ak2mbhv.ap-southeast-2.elasticbeanstalk.com/", topicDetails);
+    return axios.put("http://cmapbackend-env.dz3ak2mbhv.ap-southeast-2.elasticbeanstalk.com/update-course-topic", topicDetails);
   }
 
   removeCourseTopic(topicCode) {
