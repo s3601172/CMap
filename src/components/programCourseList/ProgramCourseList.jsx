@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Datatable } from "@o2xp/react-datatable";
-import { Link } from "react-router-dom";
 
 import "../../bootstrap.css";
 import "../../index.css";
@@ -34,10 +33,10 @@ class ProgramCourseList extends Component {
   }
 
   actionRow({ type, payload }) {
-    if(type === "save"){
+    if (type === "save") {
       let selectedLength = payload.rows.length;
       let data = payload.rows;
-  
+
       if (selectedLength > 1) {
         var i;
         for (i = 0; i < selectedLength; i++) {
@@ -47,11 +46,11 @@ class ProgramCourseList extends Component {
         console.log(data);
         this.updateRequest(data[0]);
       }
-  
+
       this.props.history.push("/program-course-list");
       window.location.reload();
     }
-  };
+  }
 
   deleteCourse(rowData) {
     let selectedLength = rowData.length;
@@ -124,12 +123,16 @@ class ProgramCourseList extends Component {
         canGlobalEdit: true,
         canSelectRow: true,
         canSearch: true,
-        additionalIcons:[{
-          title: "Add Course",
-          icon:(<Link to="/course-list">
-            <button className="btn btn-outline-primary">Add Course</button>
-          </Link>)
-        }],
+        additionalIcons: [
+          {
+            title: "Add Course",
+            icon: (
+              <a href="/courselist" className="btn btn-outline-primary">
+                AddCourse
+              </a>
+            )
+          }
+        ],
         selectionIcons: [
           {
             title: "Delete Course(/s)",
@@ -161,9 +164,8 @@ class ProgramCourseList extends Component {
         <div className="container centre bm-4">
           <h1>Program Course List</h1>
         </div>
-        <Datatable options={this.state.option} actions={this.actionRow}/>
-        <div className="container centre bm-4">
-        </div>
+        <Datatable options={this.state.option} actions={this.actionRow} />
+        <div className="container centre bm-4"></div>
       </div>
     );
   }

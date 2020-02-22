@@ -29,7 +29,7 @@ class Homepage extends Component {
         <div className="center">
           <Card 
             cardHeader="Assigned Courses"
-            cardTitle="Dummy Course (C1111)"
+            cardTitle="Programming 1 (C1111)"
             cardDesc="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
             cardBtn="Course Details"
           />
@@ -48,7 +48,7 @@ class Homepage extends Component {
 
           <Card 
             cardHeader="Assigned Courses"
-            cardTitle="Dummy Course (C1111)"
+            cardTitle="Programming 1 (C1111)"
             cardDesc="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
             url="/course-details"
             cardBtn="Course Details"

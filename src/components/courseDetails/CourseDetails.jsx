@@ -167,7 +167,7 @@ class CourseDetails extends Component {
     return (
       <div>
         <div className="container centre bm-4">
-          <h1>C1111 Dummy Course</h1>
+          <h1>Programming 1 (C1111)</h1>
         </div>
         <Datatable options={this.state.option} actions={this.actionsRow} />
       </div>
