@@ -10,7 +10,7 @@ class ProgramService {
   }
   
   removeCourse(programCode, courseCode, semester) {
-    return axios.delete("http://localhost:8080/delete-program-course", {
+    return axios.delete("http://cmapbackend-env.dz3ak2mbhv.ap-southeast-2.elasticbeanstalk.com/delete-program-course", {
       params: {
         "programCode": programCode,
         "courseCode": courseCode,

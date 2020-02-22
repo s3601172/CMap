@@ -65,7 +65,6 @@ class ProgramCourseList extends Component {
           data[i].semester
         );
       }
-      this.refreshList();
     } else {
       console.log(data);
       console.log(data[0].courseCode);
@@ -76,7 +75,6 @@ class ProgramCourseList extends Component {
         data[0].courseCode,
         data[0].semester
       );
-      this.refreshList();
     }
   }
 
@@ -165,7 +163,6 @@ class ProgramCourseList extends Component {
           <h1>Program Course List</h1>
         </div>
         <Datatable options={this.state.option} actions={this.actionRow} />
-        <div className="container centre bm-4"></div>
       </div>
     );
   }
